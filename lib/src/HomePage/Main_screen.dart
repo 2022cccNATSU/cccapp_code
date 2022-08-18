@@ -91,8 +91,8 @@ class FailyImage extends StatelessWidget{
 }
 
 
-class Main_screen extends StatelessWidget{
-  const Main_screen({Key? key}) : super(key: key);
+class main_screen extends StatelessWidget{
+  const main_screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

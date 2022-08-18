@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:async';
 
-import 'package:cccapp_code/src/HomePage/HomePage.dart';
+import 'package:cccapp_code/src/HomePage/BottomBar.dart';
+
+import '../HomePage/HomePage.dart';
 
 class LoginBonus extends StatefulWidget {
   const LoginBonus({Key? key, required this.title}) : super(key: key);
@@ -207,7 +209,7 @@ class _Congratulations extends State<Congratulations> {
                 onPressed: (() {
                   Navigator.of(context).push(
                     PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),
+                      pageBuilder: (context, animation, secondaryAnimation) => const MyHomePage(title: 'Kaname',),
                     ),
                   );
                 }),
