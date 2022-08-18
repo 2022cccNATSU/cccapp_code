@@ -99,10 +99,9 @@ class Main_screen extends StatelessWidget{
     return Column(
       children: [
         TopBar(),
-        SizedBox(height: 100,),
-        FailyImage(),
+        const SizedBox(height: 100,),
+        const FailyImage(),
       ],
     );
   }
-
 }
