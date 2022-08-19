@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../widget/Constants.dart';
 
-class TopBar extends StatelessWidget {
+const Color TopBarColor = Colors.black54;//上のバーの色
+const Color TopBarColorShadow = Colors.black26;//上のバーの影の色
+const Color DiamondColor = Colors.indigoAccent;//ダイヤの色
+const Color TopBarTextColor = Color(0xFFB0BEC5);//上のバーの数字と設定の色
+
+class TopBar extends StatelessWidget{
   final int point = 0;
-
-  const TopBar({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,14 +16,15 @@ class TopBar extends StatelessWidget {
         right: 24,
       ),
       child: Material(
-        color: topBarColor,
+        color: TopBarColor,
         elevation: 24,
-        shadowColor: topBarColorShadow,
+        shadowColor: TopBarColorShadow,
         borderRadius: const BorderRadius.only(
           bottomRight: Radius.circular(24),
           bottomLeft: Radius.circular(24),
           topRight: Radius.circular(24),
           topLeft: Radius.circular(24),
+
         ),
         child: Padding(
           padding: const EdgeInsets.only(
@@ -38,26 +40,22 @@ class TopBar extends StatelessWidget {
                 children: [
                   const Icon(
                     Icons.diamond,
-                    color: diamondColor,
+                    color: DiamondColor,
                     size: 25,
                   ),
-                  const SizedBox(
-                    width: 30,
-                  ),
+                  const SizedBox(width: 30,),
                   Text(
                     '$point',
                     style: const TextStyle(
-                      color: topBarTextColor,
+                      color: TopBarTextColor,
                       fontSize: 20,
                     ),
                   ),
-                  const SizedBox(
-                    width: 180,
-                  ),
+                  const SizedBox(width: 180,),
                   IconButton(
                     icon: const Icon(
                       Icons.settings,
-                      color: topBarTextColor,
+                      color: TopBarTextColor,
                       size: 25,
                     ),
                     onPressed: () {
@@ -74,11 +72,9 @@ class TopBar extends StatelessWidget {
   }
 }
 
-class FailyImage extends StatelessWidget {
+class FailyImage extends StatelessWidget{
   final String image = 'assets/images/faily.png';
-
   const FailyImage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -93,25 +89,17 @@ class FailyImage extends StatelessWidget {
   }
 }
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key}) : super(key: key);
+class main_screen extends StatelessWidget{
+  const main_screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/BackGround.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Column(
-        children: const <Widget>[
-          TopBar(),
-          SizedBox(height: 100),
-          FailyImage(),
-        ],
-      ),
+    return Column(
+      children: [
+        TopBar(),
+        const SizedBox(height: 100,),
+        const FailyImage(),
+      ],
     );
   }
 }

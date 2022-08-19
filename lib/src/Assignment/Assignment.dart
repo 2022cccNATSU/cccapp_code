@@ -1,22 +1,24 @@
 import 'dart:math';
+import 'package:cccapp_code/src/HomePage/Auxiliary.dart';
+import 'package:cccapp_code/src/HomePage/Main_screen.dart';
 import 'package:flutter/material.dart';
 import 'Calendar.dart';
 import 'AssignmentDetail.dart';
+import 'package:cccapp_code/src/HomePage/HomePage.dart';
 
-const ParameterBeginColor = Color(0xFFFF006F); //グラフの始まりの色
-const PameterEndColor = Color(0xFF8337EC); //グラフの終わりの色
-const TopBarColor = Color(0xFF2E8376); //大体の影の色
-const TextColor = Colors.white; //テキスト+背景色+アイコンの色
-const TopBarShadowColor = Colors.black26; //上のバーの影の色
-const AssignmentTextColor = Color(0xFFE0E0E0); //課題のテキストの色
-const AssignmentIconColor = Color(0xFF424242); //課題のアイコンの色
-const ListShadowColor = Colors.grey; //リストの影の色
-const ListSubjectColor = Colors.blueAccent; //リストのサブジェクトの色
+
+const ParameterBeginColor = Color(0xFFFF006F);//グラフの始まりの色
+const PameterEndColor = Color(0xFF8337EC);//グラフの終わりの色
+const TopBarColor = Color(0xFF2E8376);//大体の影の色
+const TextColor = Colors.white;//テキスト+背景色+アイコンの色
+const TopBarShadowColor = Colors.black26;//上のバーの影の色
+const AssignmentTextColor = Color(0xFFE0E0E0);//課題のテキストの色
+const AssignmentIconColor = Color(0xFF424242);//課題のアイコンの色
+const ListShadowColor = Colors.grey;//リストの影の色
+const ListSubjectColor = Colors.blueAccent;//リストのサブジェクトの色
 
 //Taskがよばれたときに実行
 class Task extends StatelessWidget {
-  const Task({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,11 +35,10 @@ class Task extends StatelessWidget {
 
 //Class Taskのホームで呼ばれて実行される
 class Assingment extends StatelessWidget {
-  const Assingment({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Column(
         children: [
           TopBar(),
@@ -48,14 +49,14 @@ class Assingment extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar:  const ButtonBar(),
     );
   }
 }
 
+
 //上のバーの部分
 class TopBar extends StatelessWidget {
-  const TopBar({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -65,7 +66,7 @@ class TopBar extends StatelessWidget {
           color: TopBarColor,
           elevation: 24,
           shadowColor: TopBarShadowColor,
-          borderRadius: const BorderRadius.only(
+          borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(24),
             bottomLeft: Radius.circular(24),
           ),
@@ -82,28 +83,21 @@ class TopBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     IconButton(
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.arrow_back,
                         color: TextColor,
                       ),
                       onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Calender()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Auxiliary()));
                       },
                     ),
-                    const SizedBox(
-                      width: 50,
-                    ),
-                    const Icon(
+                    SizedBox(width: 50,),
+                    Icon(
                       Icons.notes_outlined,
                       color: TextColor,
                     ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    const Text(
+                    SizedBox(width: 20,),
+                    Text(
                       '教科名',
                       style: TextStyle(
                         color: TextColor,
@@ -145,8 +139,8 @@ class _BatteryLevelIndicatorPainter extends CustomPainter {
         ..style = PaintingStyle.stroke
         ..strokeWidth = 4;
 
-      const spaceLen = 16; // 円とゲージ間の長さ
-      const lineLen = 24; // ゲージの長さ
+      final spaceLen = 16; // 円とゲージ間の長さ
+      final lineLen = 24; // ゲージの長さ
       final angle = (2 * pi * per) - (pi / 2); // 0時方向から開始するため-90度ずらす
 
       // 円の中心座標
@@ -174,11 +168,8 @@ class _BatteryLevelIndicatorPainter extends CustomPainter {
 
 //グラフの内側
 class BatteryLevelIndicator extends StatelessWidget {
-  final double percentage; //がんばってデータとる
+  final percentage = 0.1;//がんばってデータとる
   final size = 150.0;
-
-  const BatteryLevelIndicator({Key? key, required this.percentage})
-      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -193,14 +184,13 @@ class BatteryLevelIndicator extends StatelessWidget {
           color: TextColor,
           elevation: 4,
           borderRadius: BorderRadius.circular(size * 0.5),
-          child: SizedBox(
+          child: Container(
             width: size,
             height: size,
             child: Center(
               child: Text(
                 '${percentage * 100}%',
-                style:
-                    const TextStyle(color: ParameterBeginColor, fontSize: 42),
+                style: TextStyle(color: ParameterBeginColor, fontSize: 42),
               ),
             ),
           ),
@@ -211,15 +201,13 @@ class BatteryLevelIndicator extends StatelessWidget {
 }
 
 //グラフとテキスト
-class TaskManager extends StatelessWidget {
-  const TaskManager({Key? key}) : super(key: key);
-
+class TaskManager extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
+      children: [
         Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 10,
             right: 200,
             top: 10,
@@ -227,23 +215,25 @@ class TaskManager extends StatelessWidget {
           ),
           child: Text(
             '課題進捗度',
-            style: TextStyle(fontSize: 24.0, color: TopBarShadowColor),
+            style: TextStyle(
+                fontSize: 24.0,
+                color: TopBarShadowColor
+            ),
           ),
         ),
-        BatteryLevelIndicator(percentage: 0.1),
+        BatteryLevelIndicator(),
       ],
     );
   }
 }
 
 //課題というテキストのため
-class TaskText extends StatelessWidget {
-  const TaskText({Key? key}) : super(key: key);
-
+class TaskText extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(
+    // TODO: implement build
+    return Padding(
+      padding: const EdgeInsets.only(
         left: 10,
         right: 250,
         top: 10,
@@ -251,14 +241,17 @@ class TaskText extends StatelessWidget {
       ),
       child: Text(
         '課題',
-        style: TextStyle(fontSize: 24.0, color: TopBarShadowColor),
+        style: TextStyle(
+            fontSize: 24.0,
+            color: TopBarShadowColor
+        ),
       ),
     );
   }
-}
 
+}
 //追加と編集のアイコンとテキスト
-class _DetailHeader extends StatelessWidget {
+class _DetailHeader extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -272,19 +265,18 @@ class _DetailHeader extends StatelessWidget {
                 width: 48,
                 height: 48,
                 child: IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.add,
                     color: AssignmentIconColor,
                   ),
                   onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => AddTask()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AddTask()));
                   },
                 ),
               ),
             ),
-            title: const Text('追加'),
-            // subtitle: const Text(''),
+            title: Text('追加'),
+            subtitle: Text(''),
           ),
         ),
         Expanded(
@@ -295,14 +287,14 @@ class _DetailHeader extends StatelessWidget {
                 color: AssignmentTextColor,
                 width: 48,
                 height: 48,
-                child: const Icon(
+                child: Icon(
                   Icons.edit,
                   color: AssignmentIconColor,
                 ),
               ),
             ),
-            title: const Text('編集'),
-            // subtitle: Text(''),
+            title: Text('編集'),
+            subtitle: Text(''),
           ),
         ),
       ],
@@ -328,9 +320,7 @@ class _Post extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 20,
-      ),
+      margin: EdgeInsets.symmetric(horizontal: 20,),
       child: Card(
         elevation: 8,
         shadowColor: ListShadowColor,
@@ -340,11 +330,11 @@ class _Post extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 10),
+              padding: EdgeInsets.only(top: 10),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(width: 20),
+                  SizedBox(width: 20),
                   Container(
                     height: 30,
                     width: 80,
@@ -353,26 +343,26 @@ class _Post extends StatelessWidget {
                       border: Border.all(color: color),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Text(subname,
+                    child: Text(
+                        subname,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           color: TextColor,
-                        )),
+                        )
+                    ),
                   )
                 ],
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 16,),
               child: Row(
                 children: [
-                  const SizedBox(width: 20),
+                  SizedBox(width: 20),
                   Text(
                     '日付:   $date',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                     ),
                   ),
@@ -380,15 +370,13 @@ class _Post extends StatelessWidget {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 16,),
               child: Row(
                 children: [
-                  const SizedBox(width: 20),
+                  SizedBox(width: 20),
                   Text(
                     '内容:   $content',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                     ),
                   ),
@@ -403,45 +391,22 @@ class _Post extends StatelessWidget {
 }
 
 //リストのインスタンス
-class TaskList extends StatelessWidget {
-  const TaskList({Key? key}) : super(key: key);
-
-  Stream<List<Map<String, dynamic>>>? returnData() {
-    return null;
-  }
-
+class TaskList extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: returnData(),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        if (snapshot.hasData) {
-          return Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              _DetailHeader(),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return _Post(
-                      content: snapshot.data[index]['content'],
-                      date: snapshot.data[index]['date'],
-                      subname: snapshot.data[index]['subname'],
-                      color: Colors.blue,
-                    );
-                  },
-                ),
-              ),
-            ],
-          );
-        }
-        else if(snapshot.hasError){
-          return Text(snapshot.error.toString());
-        }else{
-          return const CircularProgressIndicator();
-        }
-      },
+    return Container(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          _DetailHeader(),
+          Expanded(
+              child: ListView(
+                children: [
+                  _Post(subname: '算数', date: '7月28日',content: '問題集１～３',color: ListSubjectColor),
+                ],
+              ))
+        ],
+      ),
     );
   }
 }

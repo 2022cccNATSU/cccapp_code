@@ -1,85 +1,74 @@
+//TODO: UIを整えてください！
 import 'package:flutter/material.dart';
+import 'package:cccapp_code/src/Assignment/Calendar.dart';
+import 'package:cccapp_code/src/Assignment/Assignment.dart';
 
-import '../HomePage/Main_screen.dart';
-import '../Assignment/Assignment.dart';
-import '../Assignment/Calendar.dart';
-import '../../widget/Constants.dart';
+const Color BottomBarHomeColor = Colors.cyan;//下のバーのホーム色
+const Color BottomBarCalenderColor = Colors.purpleAccent;//下のバーのカレンダーの色
+const Color BottomBarAssignmentColor = Colors.teal;//下のバーの課題の色
+const Color BottomBarTimerColor = Colors.black54;//下のバーのタイマーの色
+const Color BottomBarTextColor = Colors.green;//下のバーのテキストの色
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
+class BottomBar extends StatefulWidget {
+  const BottomBar({Key? key}) : super(key: key);
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<BottomBar> createState() => _BottomBar();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  final _pageViewController = PageController();
+class _BottomBar extends  State<BottomBar>{
   int _selectedIndex = 0;
-
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if(_selectedIndex==0){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const Calender()));
+      }
+      else if(_selectedIndex==1){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Assingment()));
+      }
+      else if(_selectedIndex==2){
+        //Navigator.push(context, MaterialPageRoute(builder: (context) => NextPage()));
+      }
+      else if(_selectedIndex==3){
+        //Navigator.push(context, MaterialPageRoute(builder: (context) => NextPage()));
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
-      child: Scaffold(
-        body: PageView(
-          controller: _pageViewController,
-          children: const <Widget>[
-            MainScreen(),
-            Calender(),
-            Assingment(),
-            SizedBox(
-              height: 100,
-              width: 100,
-            ),
-          ],
-          onPageChanged: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
+    return BottomNavigationBar(
+      currentIndex: _selectedIndex,
+      onTap: _onItemTapped,
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          activeIcon: Icon(Icons.home_filled),
+          label: 'Home',
+          backgroundColor: BottomBarHomeColor,
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            _pageViewController.animateToPage(index,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.easeOut);
-          },
-          items: const <BottomNavigationBarItem> [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              activeIcon: Icon(Icons.home_filled),
-              label: 'Home',
-              backgroundColor: bottomBarHomeColor,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month),
-              activeIcon: Icon(Icons.calendar_month_outlined),
-              label: 'Calender',
-              backgroundColor: bottomBarCalenderColor,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.assessment),
-              activeIcon: Icon(Icons.assessment_outlined),
-              label: 'Assignment',
-              backgroundColor: bottomBarAssignmentColor,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.timer),
-              activeIcon: Icon(Icons.timer),
-              label: 'Timer',
-              backgroundColor: bottomBarTimerColor,
-            ),
-          ],
-          enableFeedback: true,
-          iconSize: 25,
-          selectedFontSize: 25,
-          selectedIconTheme: const IconThemeData(size: 30, color: bottomBarTextColor),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.calendar_month),
+          activeIcon: Icon(Icons.calendar_month_outlined),
+          label: 'Calender',
+          backgroundColor: BottomBarCalenderColor,
         ),
-      ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.assessment),
+          activeIcon: Icon(Icons.assessment_outlined),
+          label: 'Assignment',
+          backgroundColor: BottomBarAssignmentColor,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.timer),
+          activeIcon: Icon(Icons.timer),
+          label: 'Timer',
+          backgroundColor: BottomBarTimerColor,
+        ),
+      ],
+      enableFeedback: true,
+      iconSize: 25,
+      selectedFontSize: 25,
+      selectedIconTheme: const IconThemeData(size: 30, color: BottomBarTextColor),
     );
   }
 }
