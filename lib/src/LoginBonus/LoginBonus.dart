@@ -6,6 +6,9 @@ import 'dart:async';
 
 import 'package:cccapp_code/src/HomePage/HomePage.dart';
 
+import '../HomePage/Auxiliary.dart';
+import '../HomePage/Main_screen.dart';
+
 class LoginBonus extends StatefulWidget {
   const LoginBonus({Key? key, required this.title}) : super(key: key);
 
@@ -207,7 +210,7 @@ class _Congratulations extends State<Congratulations> {
                 onPressed: (() {
                   Navigator.of(context).push(
                     PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),
+                      pageBuilder: (context, animation, secondaryAnimation) => Auxiliary(),
                     ),
                   );
                 }),

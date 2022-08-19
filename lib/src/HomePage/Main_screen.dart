@@ -74,7 +74,6 @@ class TopBar extends StatelessWidget{
 
 class FailyImage extends StatelessWidget{
   final String image = 'assets/images/faily.png';
-
   const FailyImage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -90,19 +89,17 @@ class FailyImage extends StatelessWidget{
   }
 }
 
-
-class Main_screen extends StatelessWidget{
-  const Main_screen({Key? key}) : super(key: key);
+class main_screen extends StatelessWidget{
+  const main_screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         TopBar(),
-        SizedBox(height: 100,),
-        FailyImage(),
+        const SizedBox(height: 100,),
+        const FailyImage(),
       ],
     );
   }
-
 }

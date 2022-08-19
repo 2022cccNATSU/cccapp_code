@@ -9,13 +9,13 @@ const Color BottomBarAssignmentColor = Colors.teal;//下のバーの課題の色
 const Color BottomBarTimerColor = Colors.black54;//下のバーのタイマーの色
 const Color BottomBarTextColor = Colors.green;//下のバーのテキストの色
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class BottomBar extends StatefulWidget {
+  const BottomBar({Key? key}) : super(key: key);
   @override
-  State<HomePage> createState() => _HomePage();
+  State<BottomBar> createState() => _BottomBar();
 }
 
-class _HomePage extends  State<HomePage>{
+class _BottomBar extends  State<BottomBar>{
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
@@ -71,5 +71,4 @@ class _HomePage extends  State<HomePage>{
       selectedIconTheme: const IconThemeData(size: 30, color: BottomBarTextColor),
     );
   }
-
 }
