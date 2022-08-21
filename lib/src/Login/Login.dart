@@ -9,6 +9,7 @@ import 'CreatAccount.dart';
 ///問題点　authenticationにユーザーネームはつかわない、ゲストログイン時の処理を決めてない、登録のうぃじぇっといらない
 ///providerで作った方がいいかも
 
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
