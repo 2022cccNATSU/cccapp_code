@@ -140,8 +140,8 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    LoginBotton(text: 'ログイン',num: 1,),
-                    LoginBotton(text: 'ゲスト',num:0,),
+                    LoginButton(text: 'ログイン',num: 1,),
+                    LoginButton(text: 'ゲスト',num: 0,),
                   ],
                 ),
               ],
@@ -182,8 +182,8 @@ class NeededInfoText extends StatelessWidget {
   }
 }
 
-class LoginBotton extends StatelessWidget {
-  const LoginBotton({Key? key,required this.text,required this.num}):super (key:key);
+class LoginButton extends StatelessWidget {
+  const LoginButton({Key? key,required this.text,required this.num}):super (key:key);
   final String text;
   final int num;
 
@@ -201,7 +201,6 @@ class LoginBotton extends StatelessWidget {
           shape: const StadiumBorder(),
         ),
         onPressed:(){
-          //TODO: ここの2段にログインとゲスト用それぞれの処理欄を用意したのでログインの場合はユーザ名とパスワードを送るようにしてください！
           if(num == 1){
             Navigator.of(context).push(
               MaterialPageRoute(

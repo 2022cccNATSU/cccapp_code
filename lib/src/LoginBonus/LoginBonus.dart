@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:async';
 
-import 'package:cccapp_code/src/HomePage/BottomBar.dart';
-
 import '../HomePage/HomePage.dart';
 
 class LoginBonus extends StatefulWidget {
