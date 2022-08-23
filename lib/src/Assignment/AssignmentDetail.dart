@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
-import 'AssignmentDetail.dart';
-const Color ThemeColor = Color(0xFFFE7C64);//テーマカラー
-const Color BackGroundColor = Color(0xFF19283D);//背景の色
-const Color TextColor = Color(0xFFB0BEC5);//全体のテキストの色
-const Color OnClickButtonColor = Color(0xFFFE7C64);//ボタンがクリックされたときの枠の色
-const Color DecisionButtonTextColor = Colors.black87;//決定ボタンのテキストの色
+
+import '../../widget/Constants.dart';
 
 class AddTask extends StatelessWidget {
+  const AddTask({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
-        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: ThemeColor),
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: themeColor),
       ),
-      home: InputPage(),
+      home: const InputPage(),
     );
   }
 }
 
 class InputPage extends StatelessWidget{
+  const InputPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: BackGroundColor,
+        backgroundColor: backGroundColor,
         body:Center(
           child:Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               InputForm(),
             ],
           ),
@@ -93,18 +93,18 @@ class _CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
-        hintStyle: TextStyle(color: TextColor),
+        hintStyle: const TextStyle(color: textColor),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: OnClickButtonColor,
+          borderSide: const BorderSide(
+            color: onClickButtonColor,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: TextColor,
+          borderSide: const BorderSide(
+            color: textColor,
           ),
         ),
       ),
@@ -115,43 +115,47 @@ class _CustomTextField extends StatelessWidget {
 
 //日付、内容、決定のボタン
 class InputForm extends StatelessWidget{
+  const InputForm({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
 
       children: [
-        SelectSubject(),
-        SizedBox(height: 48),
-        _CustomTextField(
+        const SelectSubject(),
+        const SizedBox(height: 48),
+        const _CustomTextField(
           labelText: '日付',
           hintText: '日付を入力してください',
           obscureText: false,
         ),
-        SizedBox(height: 48),
-        _CustomTextField(
+        const SizedBox(height: 48),
+        const _CustomTextField(
           labelText: '内容',
           hintText: 'やる課題を入力してください',
-          obscureText: true,
+          obscureText: false,
         ),
-        SizedBox(height: 48),
-        Container(
+        const SizedBox(height: 48),
+        SizedBox(
           width: double.infinity,
           child: TextButton(
             style: TextButton.styleFrom(
-              primary: TextColor,
-              backgroundColor: TextColor,
-              padding: EdgeInsets.symmetric(vertical: 16),
+              primary: textColor,
+              backgroundColor: textColor,
+              padding: const EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+
+            },
             child: Text(
               '決定！',
               style: Theme.of(context)
                   .textTheme
                   .button!
-                  .copyWith(color: DecisionButtonTextColor, fontSize: 18),
+                  .copyWith(color: decisionButtonTextColor, fontSize: 18),
             ),
           ),
         ),

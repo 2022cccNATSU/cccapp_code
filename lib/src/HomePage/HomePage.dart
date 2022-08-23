@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:cccapp_code/src/HomePage/BottomBar.dart';
-import 'package:cccapp_code/src/HomePage/Main_screen.dart';
+
+import '../HomePage/Main_screen.dart';
+import '../Assignment/Assignment.dart';
+import '../Assignment/Calendar.dart';
+import '../../widget/Constants.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
   final String title;
 
   @override
@@ -12,29 +14,72 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final _pageViewController = PageController();
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/BackGround.jpg'),
-              fit: BoxFit.cover,
-            )),
-        child: Column(
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        body: PageView(
+          controller: _pageViewController,
           children: const <Widget>[
-            main_screen(),
+            MainScreen(),
+            Calender(),
+            Assingment(),
+            SizedBox(
+              height: 100,
+              width: 100,
+            ),
           ],
+          onPageChanged: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
         ),
-      ),//
-      bottomNavigationBar: const BottomBar(),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: (index) {
+            _pageViewController.animateToPage(index,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeOut);
+          },
+          items: const <BottomNavigationBarItem> [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              activeIcon: Icon(Icons.home_filled),
+              label: 'Home',
+              backgroundColor: bottomBarHomeColor,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_month),
+              activeIcon: Icon(Icons.calendar_month_outlined),
+              label: 'Calender',
+              backgroundColor: bottomBarCalenderColor,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.assessment),
+              activeIcon: Icon(Icons.assessment_outlined),
+              label: 'Assignment',
+              backgroundColor: bottomBarAssignmentColor,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.timer),
+              activeIcon: Icon(Icons.timer),
+              label: 'Timer',
+              backgroundColor: bottomBarTimerColor,
+            ),
+          ],
+          enableFeedback: true,
+          iconSize: 25,
+          selectedFontSize: 25,
+          selectedIconTheme: const IconThemeData(size: 30, color: bottomBarTextColor),
+        ),
+      ),
     );
   }
 }
