@@ -74,7 +74,6 @@ class TopBar extends StatelessWidget{
 
 class FailyImage extends StatelessWidget{
   final String image = 'assets/images/faily.png';
-
   const FailyImage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -89,7 +88,6 @@ class FailyImage extends StatelessWidget{
     );
   }
 }
-
 
 class main_screen extends StatelessWidget{
   const main_screen({Key? key}) : super(key: key);

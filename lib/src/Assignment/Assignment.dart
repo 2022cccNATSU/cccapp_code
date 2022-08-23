@@ -1,7 +1,11 @@
 import 'dart:math';
+import 'package:cccapp_code/src/HomePage/Auxiliary.dart';
+import 'package:cccapp_code/src/HomePage/Main_screen.dart';
 import 'package:flutter/material.dart';
 import 'Calendar.dart';
 import 'AssignmentDetail.dart';
+import 'package:cccapp_code/src/HomePage/HomePage.dart';
+
 
 const ParameterBeginColor = Color(0xFFFF006F);//グラフの始まりの色
 const PameterEndColor = Color(0xFF8337EC);//グラフの終わりの色
@@ -34,6 +38,7 @@ class Assingment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Column(
         children: [
           TopBar(),
@@ -44,6 +49,7 @@ class Assingment extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar:  const ButtonBar(),
     );
   }
 }
@@ -82,7 +88,7 @@ class TopBar extends StatelessWidget {
                         color: TextColor,
                       ),
                       onPressed: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Calender()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Auxiliary()));
                       },
                     ),
                     SizedBox(width: 50,),

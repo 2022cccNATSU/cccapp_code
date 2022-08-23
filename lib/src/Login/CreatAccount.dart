@@ -4,21 +4,15 @@ import 'package:cccapp_code/src/LoginBonus/LoginBonus.dart';
 import 'package:provider/provider.dart';
 
 import '../../main.dart';
-import 'CreatAccount.dart';
 
-///問題点　authenticationにユーザーネームはつかわない、ゲストログイン時の処理を決めてない、登録のうぃじぇっといらない
-///providerで作った方がいいかも
-
-
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class CreateAccount extends StatefulWidget {
+  const CreateAccount({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<CreateAccount> createState() => _CreateAccount();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  String username = ('');
+class _CreateAccount extends State<CreateAccount> {
   String ma = '';
   String pw = '';
 
@@ -36,53 +30,16 @@ class _LoginPageState extends State<LoginPage> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/mori.jpeg'),
-                fit: BoxFit.cover,
-              ),
+            image: DecorationImage(
+              image: AssetImage('assets/images/mori.jpeg'),
+              fit: BoxFit.cover,
+            ),
           ),
+
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
-                Container(
-                padding:  EdgeInsetsDirectional.only(
-                    bottom: 10,
-                    start: 200
-                ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    onPrimary: Colors.black,
-                    elevation: 16,
-                    shape: const StadiumBorder(),
-                  ),
-              onPressed:()async{
-                Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const CreateAccount(),
-                    ),
-                );
-              },
-              child: Text('アカウントを作成'),
-            ),
-          ),
-                const Text(
-                  "Welcome to",
-                  style:TextStyle(
-                    shadows: [
-                      Shadow(
-                        color: Colors.white,
-                        blurRadius: 50.0/*影の大きさ*/,
-                        offset: Offset(3, 7),
-                      ),
-                    ],
-                    color: Colors.white,
-                    fontFamily: 'Lobster',
-                    fontSize: 50,
-                    letterSpacing: 3.0,
-                  ),
-                ),
                 Container(
                   width: 350,
                   height: 350,
@@ -143,13 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    LoginBotton(text: 'ログイン',num: 1,ma: ma,pw: pw,),
-                    LoginBotton(text: 'ゲスト',num:0,ma: '',pw: '',),
-                  ],
-                ),
+               LoginBotton(text: '作成',ma: ma,pw: pw,),
               ],
             ),
           ),
@@ -188,9 +139,8 @@ class NeededInfoText extends StatelessWidget {
 }
 
 class LoginBotton extends StatelessWidget {
-  LoginBotton({Key? key,required this.text,required this.num,required this.ma,required this.pw}):super (key:key);
+  LoginBotton({Key? key,required this.text,required this.ma,required this.pw}):super (key:key);
   final String text;
-  final int num;
   final String ma;
   final String pw;
 
@@ -211,36 +161,20 @@ class LoginBotton extends StatelessWidget {
           shape: const StadiumBorder(),
         ),
         onPressed:()async{
-          //TODO: ここの2段にログインとゲスト用それぞれの処理欄を用意したのでログインの場合はユーザ名とパスワードを送るようにしてください！
-          if(num == 1)//login
-            {
-            try {
-              // メール/パスワードでログイン
-              final FirebaseAuth auth = FirebaseAuth.instance;
-              final result = await auth.signInWithEmailAndPassword(
-                email: ma,
-                password: pw,
-              );
-              // ユーザー情報を更新
-              userState.setUser(result.user!);
-              // ログインに成功した場合
-              // チャット画面に遷移＋ログイン画面を破棄
-              await Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) {
-                  return LoginBonus(title: 'LogIn');
-                }),
-              );
-            } catch (e) {
-              print(e);
-            }
-
-          }else if(num == 0)//gestlogin
-             {
-            Navigator.of(context).push(
+          try {
+            final FirebaseAuth auth = FirebaseAuth.instance;
+            final result = await auth.createUserWithEmailAndPassword(
+              email: ma,
+              password: pw,
+            );
+            userState.setUser(result.user!);
+            await Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const LoginBonus(title: 'ゲスト',),
+                builder: (context) => const LoginBonus(title: 'ログイン'),
               ),
             );
+          }catch (e) {
+            print(e);
           }
         },
         child: Text(text),

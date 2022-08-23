@@ -6,6 +6,7 @@ import 'dart:async';
 
 import 'package:cccapp_code/src/HomePage/BottomBar.dart';
 
+import '../HomePage/Main_screen.dart';
 import '../HomePage/HomePage.dart';
 
 //追記BY西尾　使いたいフォント：”LoginBonus Calendar”にDynaPuffのMedium 500　それ以外("メイン画面へ"を除く)にZen Kurenaido
@@ -398,7 +399,27 @@ class _Congratulations extends State<Congratulations> {
                 ),
               ],
             ),
-          ),
+            Container(
+                padding: const EdgeInsets.all(30),
+                width: 150,
+                height: 150,
+                child:
+                const Image(image: AssetImage("assets/images/coin.jfif"))),
+            const Text("知識ポイントを 5 ポイント獲得しました！"),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: TextButton(
+                onPressed: (() {
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => Auxiliary(),
+                    ),
+                  );
+                }),
+                child: const Text("メイン画面へ"),
+              ),
+            ),
+          ],
         ),
       ),
     );
