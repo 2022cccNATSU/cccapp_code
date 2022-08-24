@@ -22,6 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,//bottombar透明にしない場合は消す
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
