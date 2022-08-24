@@ -35,8 +35,10 @@ class _BottomBar extends  State<BottomBar>{
     });
   }
   @override
-  Widget build(BuildContext context) {//日本語にしてフォントをHachi Maru Popに
+  Widget build(BuildContext context) {
     return BottomNavigationBar(
+      backgroundColor: Colors.transparent,//bottombarを透明にしない場合は下1行と合わせて消す
+      elevation: 0,//
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,
       items: const <BottomNavigationBarItem>[
@@ -44,32 +46,32 @@ class _BottomBar extends  State<BottomBar>{
           icon: Icon(Icons.home),
           activeIcon: Icon(Icons.home_filled),
           label: 'Home',
-          backgroundColor: BottomBarHomeColor,
+          //backgroundColor: BottomBarHomeColor,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_month),
           activeIcon: Icon(Icons.calendar_month_outlined),
           label: 'Calendar',
-          backgroundColor:BottomBarCalenderColor,
+          //backgroundColor:BottomBarCalenderColor,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.assessment),
           activeIcon: Icon(Icons.assessment_outlined),
           label: 'Assignment',
-          backgroundColor: BottomBarAssignmentColor,
+          //backgroundColor: BottomBarAssignmentColor,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.timer),
           activeIcon: Icon(Icons.timer),
           label: 'Timer',
-          backgroundColor: BottomBarTimerColor,
+          //backgroundColor: BottomBarTimerColor,
         ),
       ],
       enableFeedback: true,
       iconSize: 25,
       selectedFontSize: 20,
       selectedLabelStyle: const TextStyle(fontFamily: 'FredokaOne'),
-      selectedIconTheme: const IconThemeData(size: 30, color: BottomBarTextColor,),
+      selectedIconTheme: const IconThemeData(size: 30,color: BottomBarTextColor,),
     );
   }
 }
