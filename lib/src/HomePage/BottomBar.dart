@@ -35,7 +35,7 @@ class _BottomBar extends  State<BottomBar>{
     });
   }
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {//日本語にしてフォントをHachi Maru Popに
     return BottomNavigationBar(
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,
@@ -49,8 +49,8 @@ class _BottomBar extends  State<BottomBar>{
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_month),
           activeIcon: Icon(Icons.calendar_month_outlined),
-          label: 'Calender',
-          backgroundColor: BottomBarCalenderColor,
+          label: 'Calendar',
+          backgroundColor:BottomBarCalenderColor,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.assessment),
@@ -67,8 +67,9 @@ class _BottomBar extends  State<BottomBar>{
       ],
       enableFeedback: true,
       iconSize: 25,
-      selectedFontSize: 25,
-      selectedIconTheme: const IconThemeData(size: 30, color: BottomBarTextColor),
+      selectedFontSize: 20,
+      selectedLabelStyle: const TextStyle(fontFamily: 'FredokaOne'),
+      selectedIconTheme: const IconThemeData(size: 30, color: BottomBarTextColor,),
     );
   }
 }

@@ -34,118 +34,114 @@ class _LoginPageState extends State<LoginPage> {
               ),
           ),
           child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget> [
-                const Text(
-                  "Welcome to",
-                  style:TextStyle(
-                    shadows: [
-                      Shadow(
-                        color: Colors.white,
-                        blurRadius: 50.0/*影の大きさ*/,
-                        offset: Offset(3, 7),
+            child:Container(
+              width: MediaQuery.of(context).size.width-10,
+              height: MediaQuery.of(context).size.height-80,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: const DecorationImage(
+                  image: AssetImage('assets/images/waku.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget> [
+                  const Text(
+                    "Welcome to",
+                    style:TextStyle(
+                      shadows: [
+                        Shadow(
+                          color: Colors.black,
+                          blurRadius: 50.0/*影の大きさ*/,
+                          offset: Offset(3, 7),
+                        ),
+                      ],
+                      color: Colors.white,
+                      fontFamily: 'Lobster',
+                      fontSize: 50,
+                      letterSpacing: 3.0,
+                    ),
+                  ),
+                  Container(
+                    width: 350,
+                    height: 350,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage("assets/images/rf.jpg")
+                        )
+                    ),
+                  ),
+                  const NeededInfoText(color: 0xFF03A9F4, text: 'User name',),
+                  SizedBox(
+                    width:300,
+                    height:40,
+                    child: TextFormField(
+                      //minLength: A,
+                      //maxLength: B,
+                      style:const TextStyle(
+                        fontSize: 15,
                       ),
-                    ],
-                    color: Colors.white,
-                    fontFamily: 'Lobster',
-                    fontSize: 50,
-                    letterSpacing: 3.0,
-                  ),
-                ),
-                Container(
-                  width: 350,
-                  height: 350,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage("assets/images/No_Image.jpg")
-                      )
-                  ),
-                ),
-                const NeededInfoText(color: 0xFF2196F3, text: 'User name',),
-                Container(
-                  width:300,
-                  height:40,
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(),
-                    ],
-                  ),
-                  child: TextFormField(
-                    //minLength: A,
-                    //maxLength: B,
-                    style:const TextStyle(
-                      fontSize: 15,
+                      decoration: const InputDecoration(
+                        fillColor: Colors.white,//white
+                        filled: true,
+                        hintText: 'ユーザー名(A文字～B文字)',
+                      ),
+                      onChanged: (text) {
+                        username = text;
+                      },
                     ),
-                    decoration: const InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      hintText: 'ユーザー名(A文字～B文字)',
-                    ),
-                    onChanged: (text) {
-                      username = text;
-                    },
                   ),
-                ),
-                const NeededInfoText(color: 0xFFFFBE3B, text: 'Mail address',),
-                Container(
-                  width:300,
-                  height:40,
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(),
-                    ],
-                  ),
-                  child: TextFormField(
-                    style:const TextStyle(
-                      fontSize: 15,
+                  const NeededInfoText(color: 0xFFFFBE3B, text: 'Mail address',),//
+                  SizedBox(
+                    width:300,
+                    height:40,
+                    child: TextFormField(
+                      style:const TextStyle(
+                        fontSize: 15,
+                      ),
+                      decoration: const InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintText: 'メールアドレス',
+                      ),
+                      onChanged: (text) {
+                        ma = text;
+                      },
                     ),
-                    decoration: const InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      hintText: 'メールアドレス',
-                    ),
-                    onChanged: (text) {
-                      ma = text;
-                    },
                   ),
-                ),
-                const NeededInfoText(color: 0xFFF44336, text: 'Password',),
-                Container(
-                  width:300,
-                  height:40,
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(),
+                  const NeededInfoText(color: 0xFFF44336, text: 'Password',),
+                  SizedBox(
+                    width:300,
+                    height:40,
+                    child: TextFormField(
+                      obscureText: true,
+                      //minLength: A,
+                      //maxLength: B,
+                      style:const TextStyle(
+                        fontSize: 15,
+                      ),
+                      decoration: const InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintText: 'パスワード(A文字～B文字)',
+                      ),
+                      onChanged: (text) {
+                        pw = text;
+                      },
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      LoginBotton(text: 'ログイン',num: 1,),
+                      LoginBotton(text: 'ゲスト',num:0,),
                     ],
                   ),
-                  child: TextFormField(
-                    obscureText: true,
-                    //minLength: A,
-                    //maxLength: B,
-                    style:const TextStyle(
-                      fontSize: 15,
-                    ),
-                    decoration: const InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      hintText: 'パスワード(A文字～B文字)',
-                    ),
-                    onChanged: (text) {
-                      pw = text;
-                    },
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    LoginBotton(text: 'ログイン',num: 1,),
-                    LoginBotton(text: 'ゲスト',num:0,),
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
