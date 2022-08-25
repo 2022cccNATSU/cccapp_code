@@ -256,7 +256,6 @@ class TaskText extends StatelessWidget {
     );
   }
 }
-
 //追加と編集のアイコンとテキスト
 class _DetailHeader extends StatelessWidget {
   @override

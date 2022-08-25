@@ -54,16 +54,18 @@ class TopBar extends StatelessWidget {
                   const SizedBox(
                     width: 180,
                   ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.settings,
-                      color: topBarTextColor,
-                      size: 25,
+                  Expanded(
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.settings,
+                        color: topBarTextColor,
+                        size: 25,
+                      ),
+                      onPressed: () {
+                        //処理
+                      },
                     ),
-                    onPressed: () {
-                      //処理
-                    },
-                  )
+                  ),
                 ],
               ),
             ],
