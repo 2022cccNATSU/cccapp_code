@@ -6,6 +6,7 @@ import 'dart:async';
 
 import 'package:cccapp_code/src/HomePage/BottomBar.dart';
 
+import '../HomePage/Auxiliary.dart';
 import '../HomePage/Main_screen.dart';
 import '../HomePage/HomePage.dart';
 
@@ -328,6 +329,8 @@ class _Congratulations extends State<Congratulations> {
             height: 400,
             color: Colors.white,
             child: Column(
+              children:[
+                Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
@@ -419,9 +422,12 @@ class _Congratulations extends State<Congratulations> {
                 child: const Text("メイン画面へ"),
               ),
             ),
-          ],
-        ),
+        ]
+          ),
+
       ),
+      ),
+      )
     );
   }
 }

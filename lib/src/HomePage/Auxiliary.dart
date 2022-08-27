@@ -32,7 +32,7 @@ class _Auxiliary extends State<Auxiliary> {
           ],
         ),
       ),//
-      bottomNavigationBar:  const BottomBar(),
+      //bottomNavigationBar:  const BottomBar(),
     );
   }
 }

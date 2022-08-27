@@ -72,7 +72,7 @@ class _Calender extends State<Calender> {
           ),
         ],
       ),
-      bottomNavigationBar:  const BottomBar(),
+      //bottomNavigationBar:  const BottomBar(),
     );
   }
 }
