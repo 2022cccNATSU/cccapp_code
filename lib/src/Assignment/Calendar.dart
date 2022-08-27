@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:bubble/bubble.dart';
-import 'Assignment.dart';
+import 'package:cccapp_code/src/Assignment//FairyImagesInCalendar.dart';
+//import 'package:cccapp_code/widget/Fukidashi.dart';
+import 'package:cccapp_code/src/Assignment/commentsInCalendar.dart';
+
 
 const Color FrameColor = Color.fromRGBO(180, 255, 255, 1.0); //妖精コメントの色
 
-DateTime _focusedDay = DateTime.now();
+DateTime _focusedDay = DateTime.now();//エミュレーターでの時刻設定に準拠しているので注意
 
 class Calender extends StatefulWidget {
   const Calender({Key? key}) : super(key: key);
-
   @override
   State<Calender> createState() => _Calender();
 }
 
 class _Calender extends State<Calender> {
+  int monthNow=2;//_focusedDay.month;
+  int dayNow=11;//_focusedDay.day;
+  int hourNow=22;//_focusedDay.hour;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,25 +36,22 @@ class _Calender extends State<Calender> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //妖精のコメントのフレームのプログラム
-              Bubble(
-                margin: const BubbleEdges.only(top: 0),
-                nip: BubbleNip.rightBottom,
-                padding: const BubbleEdges.all(50),
-                color: FrameColor,
-                child: const Text('coment', textAlign: TextAlign.center),
+              SizedBox(
+                width: MediaQuery.of(context).size.width-150,
+                child: Bubble(
+                  margin: const BubbleEdges.only(top: 0),
+                  nip: BubbleNip.rightBottom,
+                  padding: const BubbleEdges.all(10),
+                  color: FrameColor,
+                  child: Text(comments(monthNow,dayNow,hourNow), textAlign: TextAlign.left),
+                ),
               ),
               //妖精のプログラム
-              InkWell(
-                onTap: () {
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => Task()));
-                },
-                child: Container(
-                  height: 200,
-                  width: 150,
-                  alignment: Alignment.bottomCenter,
-                  child: Image.asset('assets/images/faily.png'),
-                ),
+              Container(
+                height: 200,
+                width: 150,
+                alignment: Alignment.bottomCenter,
+                child: images(monthNow,dayNow,hourNow),
               ),
             ],
           ),
