@@ -32,8 +32,22 @@ class _IntroScreenState extends State<IntroScreen>
           (value) => Future.delayed(const Duration(seconds: 1)).then(
             (value) => //_lottieAnimation.forward().then((value) =>
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (context) => const FirstScreen()),
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return const FirstScreen();
+                      },
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        const double begin = 0.0;
+                        const double end = 1.0;
+                        final Animatable<double> tween = Tween(begin: begin, end: end)
+                            .chain(CurveTween(curve: Curves.easeInOut));
+                        final Animation<double> doubleAnimation = animation.drive(tween);
+                        return FadeTransition(
+                          opacity: doubleAnimation,
+                          child: child,
+                        );
+                      },
+                    ),
                     (route) => false),
           ),
           //),
@@ -45,7 +59,7 @@ class _IntroScreenState extends State<IntroScreen>
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        color: const Color(0xFF9ae79a),
+        color: Colors.black,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -53,7 +67,7 @@ class _IntroScreenState extends State<IntroScreen>
               duration: transitionDuration,
               curve: Curves.fastOutSlowIn,
               style: TextStyle(
-                color: const Color(0xFF4e954e),
+                color: Colors.black,
                 fontSize: !expanded ? _bigFontSize : 50,
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.w600,
@@ -86,7 +100,7 @@ class _IntroScreenState extends State<IntroScreen>
         Text(
           "ainyfairy",
           style: TextStyle(
-            color: Color(0xFF4e954e),
+            color: Colors.blue,
             fontSize: 50,
             fontFamily: 'Montserrat',
             fontWeight: FontWeight.w600,
