@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 //
 // 使い方の例：
 // String message = KnowledgePoint.applyPoint(example);
-// if ( message == 'succeed'){
+// if ( message == 'Succeed'){
 //  色々な処理の実行
 // } else {
 //  return Text(message)
@@ -19,11 +19,17 @@ class KnowledgePoint {
     final User? user = FirebaseAuth.instance.currentUser;
     final uid = user?.uid;
     DocumentSnapshot ds = await firebase.collection('points').doc(uid).get();
-    int thisData = ds['points'];
-    if(ds.exists && thisData + point > 0){
-      await firebase.collection('points').doc(uid).set({'points': thisData + point});
+    int thisData = ds['points'] + 0;
+    if (ds.exists && thisData + point > 0) {
+      await firebase
+          .collection('points')
+          .doc(uid)
+          .set({'points': thisData + point});
       return "Succeed";
-    } else if(ds.exists) {
+    } else if (!ds.exists) {
+      await firebase.collection('points').doc(uid).set({'points': point});
+      return "Succeed";
+    } else if (ds.exists) {
       return "ポイントが足りません";
     } else {
       return "データが存在しません";
