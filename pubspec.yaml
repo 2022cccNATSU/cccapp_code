@@ -75,3 +75,6 @@ flutter:
      - family: FredokaOne
        fonts:
          - asset: assets/fonts/FredokaOne-Regular.ttf
+     - family: Yomogi
+       fonts:
+         - asset: assets/fonts/Yomogi-Regular.ttf
