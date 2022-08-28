@@ -17,9 +17,9 @@ class Calender extends StatefulWidget {
 }
 
 class _Calender extends State<Calender> {
-  int monthNow=2;//_focusedDay.month;
-  int dayNow=11;//_focusedDay.day;
-  int hourNow=22;//_focusedDay.hour;
+  int monthNow=_focusedDay.month;
+  int dayNow=_focusedDay.day;
+  int hourNow=_focusedDay.hour;
 
   @override
   Widget build(BuildContext context) {
