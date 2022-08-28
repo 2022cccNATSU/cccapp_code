@@ -1,10 +1,7 @@
-
-import 'package:cccapp_code/src/HomePage/Auxiliary.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:bubble/bubble.dart';
 import 'Assignment.dart';
-import 'package:cccapp_code/src/HomePage/HomePage.dart';
 
 
 const Color FrameColor = Color.fromRGBO(180, 255, 255, 1.0); //妖精コメントの色
@@ -27,12 +24,9 @@ class _Calender extends State<Calender> {
         centerTitle: true,
         elevation: 2,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back,),
-          onPressed: () async {
-            await Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context)=>
-                  Auxiliary()),
-            );
+          icon: const Icon(Icons.arrow_back,),
+          onPressed: () {
+            Navigator.of(context).pop();
           },
         ),
       ),
@@ -72,7 +66,6 @@ class _Calender extends State<Calender> {
           ),
         ],
       ),
-      bottomNavigationBar:  const BottomBar(),
     );
   }
 }

@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:cccapp_code/src/LoginBonus/LoginBonus.dart';
 import 'package:provider/provider.dart';
 
+import '../LoginBonus/LoginBonus.dart';
 import '../../main.dart';
 
 class CreateAccount extends StatefulWidget {
@@ -100,7 +101,7 @@ class _CreateAccount extends State<CreateAccount> {
                     },
                   ),
                 ),
-               LoginBotton(text: '作成',ma: ma,pw: pw,),
+               LoginButton(text: '作成',ma: ma,pw: pw,),
               ],
             ),
           ),
@@ -138,8 +139,8 @@ class NeededInfoText extends StatelessWidget {
   }
 }
 
-class LoginBotton extends StatelessWidget {
-  LoginBotton({Key? key,required this.text,required this.ma,required this.pw}):super (key:key);
+class LoginButton extends StatelessWidget {
+  const LoginButton({Key? key,required this.text,required this.ma,required this.pw}):super (key:key);
   final String text;
   final String ma;
   final String pw;
@@ -174,7 +175,9 @@ class LoginBotton extends StatelessWidget {
               ),
             );
           }catch (e) {
-            print(e);
+            if (kDebugMode) {
+              print(e);
+            }
           }
         },
         child: Text(text),

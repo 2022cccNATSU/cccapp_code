@@ -1,10 +1,8 @@
-//TODO: UIを整えてください！
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:async';
-
-import 'package:cccapp_code/src/HomePage/BottomBar.dart';
 
 import '../HomePage/HomePage.dart';
 
@@ -102,7 +100,10 @@ class _LoginBonusState extends State<LoginBonus> {
         color: Colors.cyan[50],
         child: Center(
           child: Container(
-            width: MediaQuery.of(context).size.width,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
             height: 400,
             decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -129,10 +130,13 @@ class _LoginBonusState extends State<LoginBonus> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   GridView.builder(
                     shrinkWrap: true,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4,
                       mainAxisSpacing: 30,
                       crossAxisSpacing: 15,
@@ -173,7 +177,8 @@ class _LoginBonusState extends State<LoginBonus> {
                                   ),
                                   child:const Icon(Icons.redeem,color: Colors.red,),
                                 ),
-                                const Text("今日のログインボーナスだよ♪",
+                                const Text(
+                                  "今日のログインボーナスだよ♪",
                                   style: TextStyle(
                                     fontSize: 8,
                                     fontFamily: 'ZenKurenaido',
@@ -183,7 +188,7 @@ class _LoginBonusState extends State<LoginBonus> {
                             ),
                           ),
                         );
-                      } else if(index == now+1){
+                      } else if (index == now + 1) {
                         return Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
@@ -210,7 +215,10 @@ class _LoginBonusState extends State<LoginBonus> {
                                   shape: BoxShape.circle,
                                   color: Colors.white,
                                 ),
-                                child:const Icon(Icons.question_mark,color: Colors.blue,),
+                                child: const Icon(
+                                  Icons.question_mark,
+                                  color: Colors.blue,
+                                ),
                               ),
                               const Text(
                                 "明日も来てね♪",
@@ -222,7 +230,7 @@ class _LoginBonusState extends State<LoginBonus> {
                             ],
                           ),
                         );
-                      } else if(index > now){
+                      } else if (index > now) {
                         return Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
@@ -249,12 +257,15 @@ class _LoginBonusState extends State<LoginBonus> {
                                   shape: BoxShape.circle,
                                   color: Colors.white,
                                 ),
-                                child:const Icon(Icons.question_mark,color: Colors.blue,),
+                                child: const Icon(
+                                  Icons.question_mark,
+                                  color: Colors.blue,
+                                ),
                               ),
                             ],
                           ),
                         );
-                      } else{
+                      } else {
                         return Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
@@ -281,7 +292,8 @@ class _LoginBonusState extends State<LoginBonus> {
                                   shape: BoxShape.circle,
                                   color: Colors.white,
                                 ),
-                                child:const Icon(Icons.done,color:Colors.green),
+                                child:
+                                const Icon(Icons.done, color: Colors.green),
                               ),
                               const Text("受取済",style: TextStyle(fontFamily: 'ZenKurenaido',),),
                             ],
@@ -300,14 +312,9 @@ class _LoginBonusState extends State<LoginBonus> {
   }
 }
 
-class Congratulations extends StatefulWidget {
+class Congratulations extends StatelessWidget {
   const Congratulations({Key? key}) : super(key: key);
 
-  @override
-  _Congratulations createState() => _Congratulations();
-}
-
-class _Congratulations extends State<Congratulations> {
   static const colorizeColors = [
     Colors.black,
     Colors.white,
@@ -315,20 +322,30 @@ class _Congratulations extends State<Congratulations> {
     Colors.white,
     Colors.white,
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
         decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/BGofLB.png'),
               fit: BoxFit.cover,
             )),
         child: Center(
-          child:Container(
-            width: MediaQuery.of(context).size.width,
+          child: Container(
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
             height: 400,
             color: Colors.white,
             child: Column(
@@ -346,7 +363,7 @@ class _Congratulations extends State<Congratulations> {
                       isRepeatingAnimation: true,
                       animatedTexts: [
                         ColorizeAnimatedText(
-                          '        ',//時間稼ぎ用
+                          '        ', //時間稼ぎ用
                           textStyle: const TextStyle(fontSize: 20),
                           colors: colorizeColors,
                         ),
@@ -377,7 +394,9 @@ class _Congratulations extends State<Congratulations> {
                         ),
                       ],
                       onTap: () {
-                        print("Tap Event");
+                        if (kDebugMode) {
+                          print("Tap Event");
+                        }
                       },
                     ),
                   ),
@@ -394,7 +413,33 @@ class _Congratulations extends State<Congratulations> {
                     onPressed: (() {
                       Navigator.of(context).push(
                         PageRouteBuilder(
-                          pageBuilder: (context, animation, secondaryAnimation) => const MyHomePage(title: 'Kaname',),
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                          const MyHomePage(
+                            title: 'Kaname',
+                          ),
+                        ),
+                      );
+                    }),
+                    child: const Text("メイン画面へ"),
+                  ),
+                ),
+                Container(
+                    padding: const EdgeInsets.all(30),
+                    width: 150,
+                    height: 150,
+                    child: const Image(
+                        image: AssetImage("assets/images/coin.jfif"))),
+                const Text("知識ポイントを 5 ポイント獲得しました！"),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: TextButton(
+                    onPressed: (() {
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                          const MyHomePage(title: 'cccapp'),
                         ),
                       );
                     }),

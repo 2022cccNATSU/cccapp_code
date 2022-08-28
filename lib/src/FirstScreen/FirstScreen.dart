@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../HomePage/HomePage.dart';
+import '../Login/Login.dart';
 import '../LoginBonus/LoginBonus.dart';
 
 class FirstScreen extends StatelessWidget {
@@ -16,9 +17,15 @@ class FirstScreen extends StatelessWidget {
           return const CircularProgressIndicator();
         }
         if (snapshot.hasData) {
-          return const MyHomePage(title: 'cccapp');
+          if(snapshot.hasData == false) {
+            return const LoginBonus(title: 'cccapp');
+          } else {
+            return const MyHomePage(title: 'cccapp');
+          }
+        } else if(snapshot.hasError) {
+          return Text(snapshot.error.toString());
         }
-        return const LoginBonus(title: 'cccapp',);
+        return const LoginPage();
       },
     );
   }
