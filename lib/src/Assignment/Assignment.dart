@@ -1,6 +1,8 @@
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'Calendar.dart';
+
 import 'AssignmentDetail.dart';
 
 const ParameterBeginColor = Color(0xFFFF006F); //グラフの始まりの色
@@ -26,7 +28,7 @@ class Task extends StatelessWidget {
         primaryColor: TopBarColor,
         backgroundColor: TextColor,
       ),
-      home: Assingment(),
+      home: const Assingment(),
     );
   }
 }
@@ -40,10 +42,11 @@ class Assingment extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          TopBar(),
-          TaskManager(),
-          TaskText(),
-          Expanded(
+          const TopBar(),
+          const TaskManager(),
+          const TaskText(),
+          _DetailHeader(),
+          const Expanded(
             child: TaskList(),
           ),
         ],
@@ -80,30 +83,18 @@ class TopBar extends StatelessWidget {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: TextColor,
-                      ),
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Calender()));
-                      },
-                    ),
-                    const SizedBox(
+                  children: const [
+                    SizedBox(
                       width: 50,
                     ),
-                    const Icon(
+                    Icon(
                       Icons.notes_outlined,
                       color: TextColor,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 20,
                     ),
-                    const Text(
+                    Text(
                       '教科名',
                       style: TextStyle(
                         color: TextColor,
@@ -277,7 +268,7 @@ class _DetailHeader extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => AddTask()));
+                        MaterialPageRoute(builder: (context) => const AddTask()));
                   },
                 ),
               ),
@@ -405,14 +396,13 @@ class _Post extends StatelessWidget {
 class TaskList extends StatelessWidget {
   const TaskList({Key? key}) : super(key: key);
 
-  Stream<List<Map<String, dynamic>>>? returnData() {
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final uid = user?.uid;
+    final firebase = FirebaseFirestore.instance;
     return StreamBuilder(
-      stream: returnData(),
+      stream: firebase.collection('assignment').doc(uid!).snapshots(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasData) {
           return Column(
@@ -423,10 +413,11 @@ class TaskList extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
+                    final thisData = snapshot.data[index];
                     return _Post(
-                      content: snapshot.data[index]['content'],
-                      date: snapshot.data[index]['date'],
-                      subname: snapshot.data[index]['subname'],
+                      content: thisData['content'],
+                      date: thisData[index]['date'],
+                      subname: thisData[index]['subname'],
                       color: Colors.blue,
                     );
                   },
@@ -438,7 +429,7 @@ class TaskList extends StatelessWidget {
         else if(snapshot.hasError){
           return Text(snapshot.error.toString());
         }else{
-          return const CircularProgressIndicator();
+          return const Text("データが存在しません");
         }
       },
     );

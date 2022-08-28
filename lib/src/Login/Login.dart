@@ -1,15 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:cccapp_code/src/LoginBonus/LoginBonus.dart';
 import 'package:provider/provider.dart';
 
 import '../../main.dart';
 import '../FirstScreen/FirstScreen.dart';
-import 'CreatAccount.dart';
 
-///問題点　authenticationにユーザーネームはつかわない、ゲストログイン時の処理を決めてない、登録のうぃじぇっといらない
-///providerで作った方がいいかも
+//問題点　authenticationにユーザーネームはつかわない、ゲストログイン時の処理を決めてない、登録のうぃじぇっといらない
+//providerで作った方がいいかも
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -45,26 +43,6 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  padding:
-                      const EdgeInsetsDirectional.only(bottom: 10, start: 200),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      onPrimary: Colors.black,
-                      elevation: 16,
-                      shape: const StadiumBorder(),
-                    ),
-                    onPressed: () async {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const CreateAccount(),
-                        ),
-                      );
-                    },
-                    child: const Text('アカウントを作成'),
-                  ),
-                ),
                 const Text(
                   "Welcome to",
                   style: TextStyle(
@@ -155,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                       pw: pw,
                     ),
                     LoginButton(
-                      text: 'ゲスト',
+                      text: 'サインイン',
                       num: 0,
                       ma: ma,
                       pw: pw,
@@ -243,7 +221,7 @@ class LoginButton extends StatelessWidget {
               }
               await Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) {
-                  return const LoginBonus(title: 'LogIn');
+                  return const FirstScreen();
                 }),
               );
             } catch (e) {
@@ -254,7 +232,7 @@ class LoginButton extends StatelessWidget {
           } else if (num == 0) {
             try{
               final FirebaseAuth auth = FirebaseAuth.instance;
-              final result = await auth.createUserWithEmailAndPassword(
+              await auth.createUserWithEmailAndPassword(
                 email: ma,
                 password: pw,
               );

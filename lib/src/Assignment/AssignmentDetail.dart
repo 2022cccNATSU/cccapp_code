@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../widget/Constants.dart';
+import 'Assignment.dart';
 
 class AddTask extends StatelessWidget {
   const AddTask({Key? key}) : super(key: key);
@@ -18,22 +21,21 @@ class AddTask extends StatelessWidget {
   }
 }
 
-class InputPage extends StatelessWidget{
+class InputPage extends StatelessWidget {
   const InputPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: backGroundColor,
-        body:Center(
-          child:Column(
+        body: Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               InputForm(),
             ],
           ),
-        )
-    );
+        ));
   }
 }
 
@@ -43,25 +45,25 @@ class SelectSubject extends StatefulWidget {
   @override
   State<SelectSubject> createState() => _SelectSubject();
 }
+
 //教科のリスト
-class  _SelectSubject extends State<SelectSubject> {
-  var selectedValue = "国語";
-  final lists = <String>["国語", "数学", "なんか", ];
+class _SelectSubject extends State<SelectSubject> {
+  var selectedValue = "学校";
+  final lists = <String>["学校", "資格", "趣味", "その他"];
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       child: DropdownButtonFormField<String>(
         decoration: const InputDecoration(
-          contentPadding: EdgeInsets.only(left: 80,right: 80), //パディングの設定
+          contentPadding: EdgeInsets.only(left: 80, right: 80), //パディングの設定
         ),
         value: selectedValue,
         items: lists
             .map((String list) =>
-            DropdownMenuItem(value: list, child: Text(list)))
+                DropdownMenuItem(value: list, child: Text(list)))
             .toList(),
         onChanged: (String? value) {
           setState(() {
@@ -70,26 +72,33 @@ class  _SelectSubject extends State<SelectSubject> {
         },
       ),
     );
-
   }
-
 }
+
 //日付、内容入力のためのタイピングボードをだす
 class _CustomTextField extends StatelessWidget {
   final String labelText;
   final String hintText;
   final bool obscureText;
+  final TextEditingController controller;
 
   const _CustomTextField({
     Key? key,
     required this.labelText,
     required this.hintText,
     required this.obscureText,
+    required this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter some text';
+        }
+        return null;
+      },
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
@@ -114,23 +123,57 @@ class _CustomTextField extends StatelessWidget {
 }
 
 //日付、内容、決定のボタン
-class InputForm extends StatelessWidget{
+class InputForm extends StatefulWidget {
   const InputForm({Key? key}) : super(key: key);
+
+  @override
+  _InputFormState createState() => _InputFormState();
+}
+
+class _InputFormState extends State<InputForm> {
+  final firebase = FirebaseFirestore.instance;
+  final valueController = TextEditingController();
+  dynamic dateTime;
+
+  _datePicker(BuildContext context) async {
+    final DateTime? datePicked = await showDatePicker(
+        context: context,
+        initialDate: dateTime,
+        firstDate: DateTime(2022),
+        lastDate: DateTime(2040));
+    if (datePicked != null && datePicked != dateTime) {
+      setState(() {
+        dateTime = datePicked;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    dateTime = DateTime.now();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-
       children: [
         const SelectSubject(),
         const SizedBox(height: 48),
-        const _CustomTextField(
-          labelText: '日付',
-          hintText: '日付を入力してください',
-          obscureText: false,
+        Row(
+          children: [
+            Text(dateTime.toString()),
+            IconButton(
+              icon: const Icon(Icons.calendar_month,),
+              onPressed: () {
+                _datePicker(context);
+              },
+            )
+          ],
         ),
         const SizedBox(height: 48),
-        const _CustomTextField(
+        _CustomTextField(
+          controller: valueController,
           labelText: '内容',
           hintText: 'やる課題を入力してください',
           obscureText: false,
@@ -147,8 +190,13 @@ class InputForm extends StatelessWidget{
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            onPressed: () {
-
+            onPressed: () async {
+              final User? user = FirebaseAuth.instance.currentUser;
+              final uid = user?.uid;
+              await firebase.collection('assignment').doc(uid!).set(
+                  {'content': valueController.text, 'date': dateTime.toString()});
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const Assingment()));
             },
             child: Text(
               '決定！',
@@ -159,9 +207,7 @@ class InputForm extends StatelessWidget{
             ),
           ),
         ),
-
       ],
     );
   }
-
 }

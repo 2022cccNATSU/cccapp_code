@@ -3,7 +3,6 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:bubble/bubble.dart';
 import 'Assignment.dart';
 
-
 const Color FrameColor = Color.fromRGBO(180, 255, 255, 1.0); //妖精コメントの色
 
 DateTime _focusedDay = DateTime.now();
@@ -20,7 +19,7 @@ class _Calender extends State<Calender> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Calender'),
+        title: const Text('Calender'),
         centerTitle: true,
         elevation: 2,
         leading: IconButton(
