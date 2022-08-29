@@ -135,7 +135,7 @@ class _FailyImageState extends State<FailyImage>{
             border: Border.all(color: Colors.black54),
             color: Colors.grey[100],
           ),
-          child: Text(comments(_counter1,_counter2)),
+          child: Text(comments(_counter1,_counter2),style: const TextStyle(fontFamily: 'Yomogi',fontSize: 20),),
           //child: DefaultTextStyle(
           //  style: const TextStyle(
           //    color: Colors.black87,

@@ -3,9 +3,10 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:bubble/bubble.dart';
-import 'package:cccapp_code/src/Assignment//FairyImagesInCalendar.dart';
+import 'package:cccapp_code/src/Assignment/FairyImagesInCalendar.dart';
 //import 'package:cccapp_code/widget/Fukidashi.dart';
 import 'package:cccapp_code/src/Assignment/commentsInCalendar.dart';
+
 
 
 
@@ -40,30 +41,30 @@ class _Calender extends State<Calender> {
     _selectedDay = _focusedDay;
     //サンプルのイベントリスト
     _eventsList = {
-      DateTime.now().subtract(Duration(days: 2)): ['Event A6', 'Event B6'],
+      DateTime.now().subtract(const Duration(days: 2)): ['Event A6', 'Event B6'],
       DateTime.now(): ['Event A7', 'Event B7', 'Event C7', 'Event D7'],
-      DateTime.now().add(Duration(days: 1)): [
+      DateTime.now().add(const Duration(days: 1)): [
         'Event A8',
         'Event B8',
         'Event C8',
         'Event D8'
       ],
-      DateTime.now().add(Duration(days: 3)):
-      Set.from(['Event A9', 'Event A9', 'Event B9']).toList(),
-      DateTime.now().add(Duration(days: 7)): [
+      DateTime.now().add(const Duration(days: 3)):
+      {'Event A9', 'Event B9', 'Event C9'}.toList(),
+      DateTime.now().add(const Duration(days: 7)): [
         'Event A10',
         'Event B10',
         'Event C10'
       ],
-      DateTime.now().add(Duration(days: 11)): ['Event A11', 'Event B11'],
-      DateTime.now().add(Duration(days: 17)): [
+      DateTime.now().add(const Duration(days: 11)): ['Event A11', 'Event B11'],
+      DateTime.now().add(const Duration(days: 17)): [
         'Event A12',
         'Event B12',
         'Event C12',
         'Event D12'
       ],
-      DateTime.now().add(Duration(days: 22)): ['Event A13', 'Event B13'],
-      DateTime.now().add(Duration(days: 26)): [
+      DateTime.now().add(const Duration(days: 22)): ['Event A13', 'Event B13'],
+      DateTime.now().add(const Duration(days: 26)): [
         'Event A14',
         'Event B14',
         'Event C14'
@@ -93,23 +94,24 @@ class _Calender extends State<Calender> {
             height: 60,
             color: Colors.blue,
             alignment: Alignment.centerRight,
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
-                ),
-                child: const Text('予定を追加',style: TextStyle(color: Colors.black),),
-                onPressed:(){} 
-            ),
+            //child: ElevatedButton(
+            //    style: ElevatedButton.styleFrom(
+            //      primary: Colors.white,
+            //    ),
+            //    child: const Text('予定を追加',style: TextStyle(color: Colors.black),),
+            //    onPressed:(){}
+            //),
           ),
           //カレンダーのウィジェット
           Container(
             color: Colors.white,
             child: TableCalendar(
-              firstDay: DateTime.utc(2022, 4, 1),
-              lastDay: DateTime.utc(2025, 12, 31),
+              firstDay: DateTime.utc(_focusedDay.year-1, 1, 1),
+              lastDay: DateTime.utc(_focusedDay.year+3, 12, 31),
               focusedDay: _focusedDay,
               eventLoader: getEventForDay,
               calendarFormat: _calendarFormat,
+              pageJumpingEnabled: true,
               calendarBuilders: CalendarBuilders(
                 dowBuilder: (context, day) {
                   if (day.weekday == DateTime.sunday) {
@@ -186,13 +188,12 @@ class _Calender extends State<Calender> {
                       children: [
                         Container(
                           margin: const EdgeInsets.only(right: 10,left: 10),
-                          child: Text(text(_focusedDay,_selectedDay))
+                          child: Text(text(_focusedDay,_selectedDay),style: const TextStyle(fontSize: 20),)
                         ),
                         ListView(
                           shrinkWrap: true,
                           children: getEventForDay(_selectedDay!).map((event) => ListTile(
                             title: Text(event.toString()),
-
                           ))
                               .toList(),
                         )

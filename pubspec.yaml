@@ -41,6 +41,8 @@ dependencies:
   bubble: ^1.2.1
   table_calendar: ^3.0.6
   firebase_core: ^1.20.1
+  flutter_picker: ^2.0.5
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
