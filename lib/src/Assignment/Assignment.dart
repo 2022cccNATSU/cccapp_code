@@ -247,6 +247,7 @@ class TaskText extends StatelessWidget {
     );
   }
 }
+
 //追加と編集のアイコンとテキスト
 class _DetailHeader extends StatelessWidget {
   @override
@@ -267,8 +268,10 @@ class _DetailHeader extends StatelessWidget {
                     color: AssignmentIconColor,
                   ),
                   onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => const AddTask()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AddTask()));
                   },
                 ),
               ),
@@ -277,7 +280,7 @@ class _DetailHeader extends StatelessWidget {
             // subtitle: const Text(''),
           ),
         ),
-        Expanded(
+        /*Expanded(
           flex: 1,
           child: ListTile(
             leading: ClipOval(
@@ -285,16 +288,24 @@ class _DetailHeader extends StatelessWidget {
                 color: AssignmentTextColor,
                 width: 48,
                 height: 48,
-                child: const Icon(
-                  Icons.edit,
-                  color: AssignmentIconColor,
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.edit,
+                    color: AssignmentIconColor,
+                  ),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AddTask(checkString: true, data: null,)));
+                  }
                 ),
               ),
             ),
             title: const Text('編集'),
             // subtitle: Text(''),
           ),
-        ),
+        ),*/
       ],
     );
   }
@@ -425,10 +436,9 @@ class TaskList extends StatelessWidget {
               ),
             ],
           );
-        }
-        else if(snapshot.hasError){
+        } else if (snapshot.hasError) {
           return Text(snapshot.error.toString());
-        }else{
+        } else {
           return const Text("データが存在しません");
         }
       },

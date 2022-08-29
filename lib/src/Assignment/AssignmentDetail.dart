@@ -27,15 +27,16 @@ class InputPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: backGroundColor,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              InputForm(),
-            ],
-          ),
-        ));
+      backgroundColor: backGroundColor,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            InputForm(),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -164,11 +165,13 @@ class _InputFormState extends State<InputForm> {
           children: [
             Text(dateTime.toString()),
             IconButton(
-              icon: const Icon(Icons.calendar_month,),
+              icon: const Icon(
+                Icons.calendar_month,
+              ),
               onPressed: () {
                 _datePicker(context);
               },
-            )
+            ),
           ],
         ),
         const SizedBox(height: 48),
@@ -193,8 +196,10 @@ class _InputFormState extends State<InputForm> {
             onPressed: () async {
               final User? user = FirebaseAuth.instance.currentUser;
               final uid = user?.uid;
-              await firebase.collection('assignment').doc(uid!).set(
-                  {'content': valueController.text, 'date': dateTime.toString()});
+              await firebase.collection('assignment').doc(uid!).set({
+                'content': valueController.text,
+                'date': dateTime.toString(),
+              });
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const Assingment()));
             },
