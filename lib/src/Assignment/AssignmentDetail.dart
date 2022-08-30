@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../widget/Constants.dart';
+
 import '../../widget/Colors.dart';
 import '../../widget/Constants.dart';
 import 'Assignment.dart';
@@ -50,7 +52,6 @@ class SelectSubject extends StatefulWidget {
   @override
   State<SelectSubject> createState() => _SelectSubject();
 }
-
 //教科のリスト
 class _SelectSubject extends State<SelectSubject> {
   final lists = <String>["学校", "資格", "趣味", "その他"];
