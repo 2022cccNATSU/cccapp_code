@@ -44,6 +44,12 @@ class _SettingsState extends State<Settings> {
           builder: (_) {
             return AlertDialog(
               title: Text(FirebaseAuth.instance.currentUser!.email.toString()),
+              actions:[
+                TextButton(
+                  child: const Text("キャンセル"),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
             );
           },
         );

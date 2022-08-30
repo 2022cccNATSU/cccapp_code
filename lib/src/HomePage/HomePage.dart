@@ -3,12 +3,11 @@
 
 import 'package:flutter/material.dart';
 
-import '../Assignment/Assignment.dart';
-import '../Assignment/Calendar.dart';
-import '../HomePage/Main_screen.dart';
-import '../Timer/TimerPage.dart';
+import 'package:cccapp_code/src/Assignment/Assignment.dart';
+import 'package:cccapp_code/src/Assignment/Calendar.dart';
+import 'package:cccapp_code/src/HomePage/Main_screen.dart';
+import 'package:cccapp_code/src/Timer/TimerPage.dart';
 import 'BottomBar.dart';
-import 'Main_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);

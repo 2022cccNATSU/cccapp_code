@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'KnowledgePoint.dart';
+import '../../widget/KnowledgePoint.dart';
 
 class TimerPage extends StatefulWidget{
   const TimerPage({Key? key}) : super(key: key);

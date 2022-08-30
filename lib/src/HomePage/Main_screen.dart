@@ -1,8 +1,8 @@
 //import 'dart:io';
 //import 'dart:async';
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
-//import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cccapp_code/src/HomePage/commentsInHP.dart';
 import 'package:cccapp_code/src/HomePage/FairyImagesInHP.dart';
 
