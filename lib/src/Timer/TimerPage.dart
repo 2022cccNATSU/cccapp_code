@@ -148,7 +148,15 @@ class _TimerPage extends State<TimerPage>{
                         print(message);
                       }
                     }else{
-                      timerSet(_datetime!.minute,_datetime!.second);}
+                      if(isStart){
+                        cancelTimer();
+                      }else {
+                        if (_datetime!.minute == 0 && _datetime!.second == 0) {
+                          print(_datetime!.minute);
+                        }else{
+                          timerSet(_datetime!.minute,_datetime!.second);
+                        }
+                      }}
                     },
                 ),
               ),
