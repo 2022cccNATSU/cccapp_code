@@ -120,8 +120,8 @@ class TopBar extends StatelessWidget {
 
 //グラフの外側
 class _BatteryLevelIndicatorPainter extends CustomPainter {
-  final double percentage; // 課題進捗度の割合
-  final double textCircleRadius; // 内側に表示される白丸の半径
+  final double percentage;
+  final double textCircleRadius;
 
   _BatteryLevelIndicatorPainter({
     required this.percentage,

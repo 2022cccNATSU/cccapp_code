@@ -1,6 +1,8 @@
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../widget/Constants.dart';
+import 'Settings.dart';
 
 class TopBar extends StatelessWidget {
   final int point = 0;
@@ -62,7 +64,7 @@ class TopBar extends StatelessWidget {
                         size: 25,
                       ),
                       onPressed: () {
-                        //処理
+                        Navigator.of(context).push(MaterialPageRoute(builder:(BuildContext context)=>Settings()));
                       },
                     ),
                   ),

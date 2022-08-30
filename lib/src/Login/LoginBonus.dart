@@ -192,7 +192,7 @@ class _LoginBonusState extends State<LoginBonus> {
                                     fontSize: 8,
                                     fontFamily: 'ZenKurenaido',
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
