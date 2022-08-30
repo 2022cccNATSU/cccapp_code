@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: AssetImage("assets/images/fainy.png"),
+                      image: AssetImage("assets/images/rf.jpg"),
                     ),
                   ),
                 ),

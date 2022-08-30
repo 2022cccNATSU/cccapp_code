@@ -28,6 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
         return false;
       },//
       child: Scaffold(
+        extendBody: true,
         body: PageView(
           controller: _pageViewController,
           children: const <Widget>[
