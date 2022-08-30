@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cccapp_code/src/Assignment/Calendar.dart';
 import 'package:cccapp_code/src/Assignment/Assignment.dart';
 import 'package:cccapp_code/src/HomePage//HomePage.dart';
-import 'package:cccapp_code/debuging/TimerPage.dart';
+
 
 const Color BottomBarHomeColor = Colors.indigo;//下のバーのホーム色
 const Color BottomBarCalenderColor = Colors.blue;//下のバーのカレンダーの色
@@ -32,7 +32,7 @@ class _BottomBar extends  State<BottomBar>{
         Navigator.push(context, MaterialPageRoute(builder: (context) => Assingment()));
       }
       else if(_selectedIndex==3){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => TimerPage()));
+        //Navigator.push(context, MaterialPageRoute(builder: (context) => TimerPage()));
       }
     });
   }
