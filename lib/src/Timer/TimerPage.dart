@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class TimerPage extends StatefulWidget{
+  const TimerPage({Key? key}) : super(key: key);
+
   @override
   State<TimerPage> createState() => _TimerPage();
 }

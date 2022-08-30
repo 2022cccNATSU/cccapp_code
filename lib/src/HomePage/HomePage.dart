@@ -7,6 +7,7 @@ import '../HomePage/Main_screen.dart';
 import '../Assignment/Assignment.dart';
 import '../Assignment/Calendar.dart';
 import '../../widget/Constants.dart';
+import '../Timer/TimerPage.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -33,10 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
             MainScreen(),
             Calender(),
             Assingment(),
-            SizedBox(
-              height: 100,
-              width: 100,
-            ),
+            TimerPage(),
           ],
           onPageChanged: (index) {
             setState(() {
