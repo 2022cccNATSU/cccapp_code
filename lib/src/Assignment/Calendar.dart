@@ -292,6 +292,7 @@ class _CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      style: const TextStyle(color: TextColor),
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: const TextStyle(color: TextColor),
