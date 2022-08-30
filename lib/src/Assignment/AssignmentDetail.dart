@@ -136,7 +136,7 @@ class InputForm extends StatefulWidget {
 
 class _InputFormState extends State<InputForm> {
   final firebase = FirebaseFirestore.instance;
-  final valueController = TextEditingController();
+  late TextEditingController valueController;
   dynamic dateTime;
 
   _datePicker(BuildContext context) async {
@@ -155,6 +155,7 @@ class _InputFormState extends State<InputForm> {
   @override
   void initState() {
     super.initState();
+    valueController = TextEditingController();
     dateTime = DateTime.now();
   }
 
