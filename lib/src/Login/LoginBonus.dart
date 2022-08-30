@@ -11,7 +11,8 @@ import '../HomePage/HomePage.dart';
 
 //追記BY西尾　使いたいフォント：”LoginBonus Calendar”にDynaPuffのMedium 500　それ以外("メイン画面へ"を除く)にZen Kurenaido
 class LoginBonus extends StatefulWidget {
-  const LoginBonus({Key? key, required this.title, required this.data}) : super(key: key);
+  const LoginBonus({Key? key, required this.title, required this.data})
+      : super(key: key);
   final Map<String, dynamic> data;
   final String title;
 
@@ -102,16 +103,13 @@ class _LoginBonusState extends State<LoginBonus> {
         color: Colors.cyan[50],
         child: Center(
           child: Container(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
+            width: MediaQuery.of(context).size.width,
             height: 400,
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/BGofLB.png'),
-                  fit: BoxFit.cover,
-                )),
+              image: AssetImage('assets/images/BGofLB.png'),
+              fit: BoxFit.cover,
+            )),
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
@@ -138,7 +136,7 @@ class _LoginBonusState extends State<LoginBonus> {
                   GridView.builder(
                     shrinkWrap: true,
                     gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4,
                       mainAxisSpacing: 30,
                       crossAxisSpacing: 15,
@@ -170,14 +168,22 @@ class _LoginBonusState extends State<LoginBonus> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
-                              children:[
-                                Text("${(index + 1).toString()} 日目",style: const TextStyle(fontFamily: 'ZenKurenaido',),),
+                              children: [
+                                Text(
+                                  "${(index + 1).toString()} 日目",
+                                  style: const TextStyle(
+                                    fontFamily: 'ZenKurenaido',
+                                  ),
+                                ),
                                 Container(
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.white,
                                   ),
-                                  child:const Icon(Icons.redeem,color: Colors.red,),
+                                  child: const Icon(
+                                    Icons.redeem,
+                                    color: Colors.red,
+                                  ),
                                 ),
                                 const Text(
                                   "今日のログインボーナスだよ♪",
@@ -210,8 +216,13 @@ class _LoginBonusState extends State<LoginBonus> {
                           ),
                           //margin: const EdgeInsets.only(top:20,bottom:20),
                           child: Column(
-                            children:[
-                              Text("${(index + 1).toString()} 日目",style: const TextStyle(fontFamily: 'ZenKurenaido',),),
+                            children: [
+                              Text(
+                                "${(index + 1).toString()} 日目",
+                                style: const TextStyle(
+                                  fontFamily: 'ZenKurenaido',
+                                ),
+                              ),
                               Container(
                                 decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
@@ -252,8 +263,13 @@ class _LoginBonusState extends State<LoginBonus> {
                           ),
                           //margin: const EdgeInsets.only(top:20,bottom:20),
                           child: Column(
-                            children:[
-                              Text("${(index + 1).toString()} 日目",style: const TextStyle(fontFamily: 'ZenKurenaido',),),
+                            children: [
+                              Text(
+                                "${(index + 1).toString()} 日目",
+                                style: const TextStyle(
+                                  fontFamily: 'ZenKurenaido',
+                                ),
+                              ),
                               Container(
                                 decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
@@ -287,17 +303,27 @@ class _LoginBonusState extends State<LoginBonus> {
                           ),
                           //margin: const EdgeInsets.only(top:20,bottom:20),
                           child: Column(
-                            children:[
-                              Text("${(index + 1).toString()} 日目",style: const TextStyle(fontFamily: 'ZenKurenaido',),),
+                            children: [
+                              Text(
+                                "${(index + 1).toString()} 日目",
+                                style: const TextStyle(
+                                  fontFamily: 'ZenKurenaido',
+                                ),
+                              ),
                               Container(
                                 decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.white,
                                 ),
                                 child:
-                                const Icon(Icons.done, color: Colors.green),
+                                    const Icon(Icons.done, color: Colors.green),
                               ),
-                              const Text("受取済",style: TextStyle(fontFamily: 'ZenKurenaido',),),
+                              const Text(
+                                "受取済",
+                                style: TextStyle(
+                                  fontFamily: 'ZenKurenaido',
+                                ),
+                              ),
                             ],
                           ),
                         );
@@ -329,30 +355,20 @@ class Congratulations extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/BGofLB.png'),
-              fit: BoxFit.cover,
-            )),
+          image: DecorationImage(
+            image: AssetImage('assets/images/BGofLB.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Center(
           child: Container(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
+            width: MediaQuery.of(context).size.width,
             height: 400,
             color: Colors.white,
             child: Column(
-              children:[
-                Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
@@ -373,27 +389,42 @@ class Congratulations extends StatelessWidget {
                         ),
                         ColorizeAnimatedText(
                           'ログインボーナスを獲得！',
-                          textStyle: const TextStyle(fontSize: 20,fontFamily: 'ZenKurenaido',),
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'ZenKurenaido',
+                          ),
                           colors: colorizeColors,
                         ),
                         ColorizeAnimatedText(
                           '今日も一緒に頑張ろうね♪',
-                          textStyle: const TextStyle(fontSize: 20,fontFamily: 'ZenKurenaido',),
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'ZenKurenaido',
+                          ),
                           colors: colorizeColors,
                         ),
                         ColorizeAnimatedText(
-                          '        ',//時間稼ぎ用
-                          textStyle: const TextStyle(fontSize: 20,fontFamily: 'ZenKurenaido',),
+                          '        ', //時間稼ぎ用
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'ZenKurenaido',
+                          ),
                           colors: colorizeColors,
                         ),
                         ColorizeAnimatedText(
                           'ログインボーナスを獲得！',
-                          textStyle: const TextStyle(fontSize: 20,fontFamily: 'ZenKurenaido',),
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'ZenKurenaido',
+                          ),
                           colors: colorizeColors,
                         ),
                         ColorizeAnimatedText(
                           '今日も一緒に頑張ろうね♪',
-                          textStyle: const TextStyle(fontSize: 20,fontFamily: 'ZenKurenaido',),
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'ZenKurenaido',
+                          ),
                           colors: colorizeColors,
                         ),
                       ],
@@ -409,8 +440,14 @@ class Congratulations extends StatelessWidget {
                     padding: const EdgeInsets.all(30),
                     width: 150,
                     height: 150,
-                    child: const Image(image: AssetImage("assets/images/coin.jfif"))),
-                const Text("知識ポイントを 5 ポイント獲得しました！",style: TextStyle(fontFamily: 'ZenKurenaido',),),
+                    child: const Image(
+                        image: AssetImage("assets/images/coin.jfif"))),
+                const Text(
+                  "知識ポイントを 5 ポイント獲得しました！",
+                  style: TextStyle(
+                    fontFamily: 'ZenKurenaido',
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: TextButton(
@@ -419,7 +456,7 @@ class Congratulations extends StatelessWidget {
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
-                          const MyHomePage(
+                                  const MyHomePage(
                             title: 'Kaname',
                           ),
                         ),
@@ -443,7 +480,7 @@ class Congratulations extends StatelessWidget {
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
-                          const MyHomePage(title: 'cccapp'),
+                                  const MyHomePage(title: 'cccapp'),
                         ),
                       );
                     }),
@@ -455,8 +492,6 @@ class Congratulations extends StatelessWidget {
           ),
         ),
       ),
-      ),
-      )
     );
   }
 }
