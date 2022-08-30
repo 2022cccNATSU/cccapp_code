@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                     LoginButton(
                       text: 'サインイン',
                       num: 0,
-                      ma: 'kanam11@gmail.com',
+                      ma: 'kanam12@gmail.com',
                       pw: 'kaname',
                     ),
                   ],
