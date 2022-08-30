@@ -20,8 +20,17 @@ class _LoginPageState extends State<LoginPage> {
   String ma = ('');
   String pw = ('');
 
-  var controller = TextEditingController();
+  var controller1 = TextEditingController();
+  var controller2 = TextEditingController();
   var focusNode = FocusNode();
+
+  void txtChange1(){
+    setState((){ma = controller1.text;});
+  }
+
+  void txtChange2(){
+    setState((){pw = controller2.text;});
+  }
 
   @override
   void setState(VoidCallback fn) {
@@ -85,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   child: TextFormField(
+                    controller: controller1,
                     style: const TextStyle(
                       fontSize: 15,
                     ),
@@ -93,11 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                       filled: true,
                       hintText: 'メールアドレス',
                     ),
-                    onChanged: (String text1) {
-                      setState(() {
-                        pw = text1;
-                      });
-                    },
+                    onChanged: (text) {txtChange1();}
                   ),
                 ),
                 const NeededInfoText(
@@ -113,6 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   child: TextFormField(
+                    controller: controller2,
                     obscureText: true,
                     // minLength: A,
                     // maxLength: B,
@@ -124,11 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                       filled: true,
                       hintText: 'パスワード',
                     ),
-                    onChanged: (String text2) {
-                      setState(() {
-                        pw = text2;
-                      });
-                    },
+                    onChanged: (text2) {txtChange2();}
                   ),
                 ),
                 Row(
@@ -143,8 +146,8 @@ class _LoginPageState extends State<LoginPage> {
                     LoginButton(
                       text: 'サインイン',
                       num: 0,
-                      ma: 'kanam16@gmail.com',
-                      pw: 'kaname',
+                      ma: ma,
+                      pw: pw,
                     ),
                   ],
                 ),
@@ -244,10 +247,12 @@ class LoginButton extends StatelessWidget {
               final FirebaseAuth auth = FirebaseAuth.instance;
               var today = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
-              await auth.createUserWithEmailAndPassword(
+              final result = await auth.createUserWithEmailAndPassword(
                 email: ma,
                 password: pw,
               );
+              userState.setUser(result.user!);
+
               final FirebaseFirestore firebase = FirebaseFirestore.instance;
               final User? user = FirebaseAuth.instance.currentUser;
               final uid = user?.uid;

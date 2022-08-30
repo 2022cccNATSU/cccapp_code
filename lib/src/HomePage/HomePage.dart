@@ -3,11 +3,12 @@
 
 import 'package:flutter/material.dart';
 
-import '../HomePage/Main_screen.dart';
 import '../Assignment/Assignment.dart';
 import '../Assignment/Calendar.dart';
-import '../../widget/Constants.dart';
+import '../HomePage/Main_screen.dart';
 import '../Timer/TimerPage.dart';
+import 'BottomBar.dart';
+import 'Main_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -26,7 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return WillPopScope(
       onWillPop: () async {
         return false;
-      },
+      },//
       child: Scaffold(
         body: PageView(
           controller: _pageViewController,
@@ -42,8 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           },
         ),
-      ),//
-      bottomNavigationBar: const BottomBar(),
+        bottomNavigationBar: const BottomBar(),
+      ),
     );
   }
 }
