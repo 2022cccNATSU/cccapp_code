@@ -351,6 +351,8 @@ class Congratulations extends StatelessWidget {
             height: 400,
             color: Colors.white,
             child: Column(
+              children:[
+                Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
@@ -453,6 +455,8 @@ class Congratulations extends StatelessWidget {
           ),
         ),
       ),
+      ),
+      )
     );
   }
 }

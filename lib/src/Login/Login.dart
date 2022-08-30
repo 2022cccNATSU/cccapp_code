@@ -16,8 +16,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String ma = ('');
-  String pw = ('');
+  String username = ('');
+  String ma = '';
+  String pw = '';
+
 
   @override
   void setState(VoidCallback fn) {
