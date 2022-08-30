@@ -42,45 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           },
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            _pageViewController.animateToPage(index,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.easeOut);
-          },
-          items: const <BottomNavigationBarItem> [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              activeIcon: Icon(Icons.home_filled),
-              label: 'Home',
-              backgroundColor: bottomBarHomeColor,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month),
-              activeIcon: Icon(Icons.calendar_month_outlined),
-              label: 'Calender',
-              backgroundColor: bottomBarCalenderColor,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.assessment),
-              activeIcon: Icon(Icons.assessment_outlined),
-              label: 'Assignment',
-              backgroundColor: bottomBarAssignmentColor,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.timer),
-              activeIcon: Icon(Icons.timer),
-              label: 'Timer',
-              backgroundColor: bottomBarTimerColor,
-            ),
-          ],
-          enableFeedback: true,
-          iconSize: 25,
-          selectedFontSize: 25,
-          selectedIconTheme: const IconThemeData(size: 30, color: bottomBarTextColor),
-        ),
-      ),
+      ),//
+      bottomNavigationBar: const BottomBar(),
     );
   }
 }
