@@ -2,6 +2,7 @@
 // TODO: ログインボーナスを受け取ったときに知識ポイントを増加する
 
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';

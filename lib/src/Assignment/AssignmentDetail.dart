@@ -4,9 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../widget/Constants.dart';
-
 import '../../widget/Colors.dart';
-import '../../widget/Constants.dart';
 import 'Assignment.dart';
 
 var selectedValue = "学校";
@@ -202,7 +200,7 @@ class _InputFormState extends State<InputForm> {
               final User? user = FirebaseAuth.instance.currentUser;
               final uid = user?.uid;
               try {
-                await firebase.collection('assignment').doc(uid!).collection(DateTime.now().toString()).doc(uid!).set({
+                await firebase.collection('assignment').doc(uid!).collection(DateTime.now().toString()).doc(uid).set({
                   'content': valueController.text,
                   'date': dateTime.toString(),
                   'subname': selectedValue,

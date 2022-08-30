@@ -17,9 +17,11 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String username = ('');
-  String ma = '';
-  String pw = '';
+  String ma = ('');
+  String pw = ('');
 
+  var controller = TextEditingController();
+  var focusNode = FocusNode();
 
   @override
   void setState(VoidCallback fn) {
@@ -66,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: AssetImage("assets/images/No_Image.jpg"),
+                      image: AssetImage("assets/images/fainy.png"),
                     ),
                   ),
                 ),
@@ -91,8 +93,10 @@ class _LoginPageState extends State<LoginPage> {
                       filled: true,
                       hintText: 'メールアドレス',
                     ),
-                    onChanged: (text) {
-                      ma = text;
+                    onChanged: (String text1) {
+                      setState(() {
+                        pw = text1;
+                      });
                     },
                   ),
                 ),
@@ -110,8 +114,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: TextFormField(
                     obscureText: true,
-                    //minLength: A,
-                    //maxLength: B,
+                    // minLength: A,
+                    // maxLength: B,
                     style: const TextStyle(
                       fontSize: 15,
                     ),
@@ -120,8 +124,10 @@ class _LoginPageState extends State<LoginPage> {
                       filled: true,
                       hintText: 'パスワード',
                     ),
-                    onChanged: (String text) {
-                      pw = text;
+                    onChanged: (String text2) {
+                      setState(() {
+                        pw = text2;
+                      });
                     },
                   ),
                 ),
@@ -137,8 +143,8 @@ class _LoginPageState extends State<LoginPage> {
                     LoginButton(
                       text: 'サインイン',
                       num: 0,
-                      ma: ma,
-                      pw: pw,
+                      ma: 'kanam11@gmail.com',
+                      pw: 'kaname',
                     ),
                   ],
                 ),
@@ -221,7 +227,7 @@ class LoginButton extends StatelessWidget {
               );
               userState.setUser(result.user!);
               if (kDebugMode) {
-                print(ma);
+                print("$ma $pw");
               }
               await Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) {
@@ -246,7 +252,7 @@ class LoginButton extends StatelessWidget {
               final User? user = FirebaseAuth.instance.currentUser;
               final uid = user?.uid;
 
-              await firebase.collection('points').doc(uid).set({'points': 0});
+              await firebase.collection('points').doc(uid!).set({'points': 0});
               await firebase
                   .collection('login')
                   .doc(uid)
