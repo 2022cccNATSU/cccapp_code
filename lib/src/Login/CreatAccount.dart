@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cccapp_code/src/LoginBonus/LoginBonus.dart';
 import 'package:provider/provider.dart';
 
-import '../../debuging/main.dart';
+import '../../main.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({Key? key}) : super(key: key);
