@@ -1,13 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../main.dart';
 import '../FirstScreen/FirstScreen.dart';
-
-//問題点　authenticationにユーザーネームはつかわない、ゲストログイン時の処理を決めてない、登録のうぃじぇっといらない
-//providerで作った方がいいかも
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -17,9 +16,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String username = ('');
-  String ma = 'kaname@gmail.com';
-  String pw = 'kaname';
+  String ma = ('');
+  String pw = ('');
 
   @override
   void setState(VoidCallback fn) {
@@ -49,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                     shadows: [
                       Shadow(
                         color: Colors.white,
-                        blurRadius: 50.0 /*影の大きさ*/,
+                        blurRadius: 50.0,
                         offset: Offset(3, 7),
                       ),
                     ],
@@ -63,10 +61,12 @@ class _LoginPageState extends State<LoginPage> {
                   width: 350,
                   height: 350,
                   decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage("assets/images/No_Image.jpg"))),
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage("assets/images/No_Image.jpg"),
+                    ),
+                  ),
                 ),
                 const NeededInfoText(
                   color: 0xFFFFBE3B,
@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: const InputDecoration(
                       fillColor: Colors.white,
                       filled: true,
-                      hintText: 'パスワード(A文字～B文字)',
+                      hintText: 'パスワード',
                     ),
                     onChanged: (String text) {
                       pw = text;
@@ -168,7 +168,7 @@ class NeededInfoText extends StatelessWidget {
           shadows: [
             Shadow(
               color: Color(color),
-              blurRadius: 25.0 /*影の大きさ*/,
+              blurRadius: 25.0,
               offset: const Offset(3, 7),
             ),
           ],
@@ -183,7 +183,12 @@ class NeededInfoText extends StatelessWidget {
 }
 
 class LoginButton extends StatelessWidget {
-  const LoginButton({Key? key, required this.text, required this.num, required this.ma, required this.pw})
+  const LoginButton(
+      {Key? key,
+      required this.text,
+      required this.num,
+      required this.ma,
+      required this.pw})
       : super(key: key);
   final String text;
   final int num;
@@ -205,8 +210,7 @@ class LoginButton extends StatelessWidget {
           shape: const StadiumBorder(),
         ),
         onPressed: () async {
-          if (num == 1)
-          {
+          if (num == 1) {
             try {
               final FirebaseAuth auth = FirebaseAuth.instance;
               final result = await auth.signInWithEmailAndPassword(
@@ -214,8 +218,6 @@ class LoginButton extends StatelessWidget {
                 password: pw,
               );
               userState.setUser(result.user!);
-              // ログインに成功した場合
-              // チャット画面に遷移＋ログイン画面を破棄
               if (kDebugMode) {
                 print(ma);
               }
@@ -230,20 +232,30 @@ class LoginButton extends StatelessWidget {
               }
             }
           } else if (num == 0) {
-            try{
+            try {
               final FirebaseAuth auth = FirebaseAuth.instance;
+              var today = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
               await auth.createUserWithEmailAndPassword(
                 email: ma,
                 password: pw,
               );
-              // ユーザー登録に成功した場合
-              // チャット画面に遷移＋ログイン画面を破棄
+              final FirebaseFirestore firebase = FirebaseFirestore.instance;
+              final User? user = FirebaseAuth.instance.currentUser;
+              final uid = user?.uid;
+
+              await firebase.collection('points').doc(uid).set({'points': 0});
+              await firebase
+                  .collection('login')
+                  .doc(uid)
+                  .set({'date': today.toString(), 'streak': 0});
+
               await Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) {
                   return const FirstScreen();
                 }),
               );
-            } catch(e){
+            } catch (e) {
               if (kDebugMode) {
                 print(e);
               }

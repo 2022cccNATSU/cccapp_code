@@ -1,3 +1,6 @@
+// TODO: 何日連続でログインしているか記録する
+// TODO: ログインボーナスを受け取ったときに知識ポイントを増加する
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +11,8 @@ import '../HomePage/HomePage.dart';
 
 //追記BY西尾　使いたいフォント：”LoginBonus Calendar”にDynaPuffのMedium 500　それ以外("メイン画面へ"を除く)にZen Kurenaido
 class LoginBonus extends StatefulWidget {
-  const LoginBonus({Key? key, required this.title}) : super(key: key);
-
+  const LoginBonus({Key? key, required this.title, required this.data}) : super(key: key);
+  final Map<String, dynamic> data;
   final String title;
 
   @override
@@ -17,8 +20,6 @@ class LoginBonus extends StatefulWidget {
 }
 
 class _LoginBonusState extends State<LoginBonus> {
-  int now = 3;
-
   void showingDialog() async {
     showDialog(
       context: context,
@@ -95,6 +96,7 @@ class _LoginBonusState extends State<LoginBonus> {
 
   @override
   Widget build(BuildContext context) {
+    final now = widget.data['streak'];
     return Scaffold(
       body: Container(
         color: Colors.cyan[50],

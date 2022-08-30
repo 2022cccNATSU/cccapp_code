@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../widget/Colors.dart';
 import '../../widget/Constants.dart';
 import 'Assignment.dart';
+
+var selectedValue = "学校";
 
 class AddTask extends StatelessWidget {
   const AddTask({Key? key}) : super(key: key);
@@ -49,7 +53,6 @@ class SelectSubject extends StatefulWidget {
 
 //教科のリスト
 class _SelectSubject extends State<SelectSubject> {
-  var selectedValue = "学校";
   final lists = <String>["学校", "資格", "趣味", "その他"];
 
   @override
@@ -196,10 +199,18 @@ class _InputFormState extends State<InputForm> {
             onPressed: () async {
               final User? user = FirebaseAuth.instance.currentUser;
               final uid = user?.uid;
-              await firebase.collection('assignment').doc(uid!).set({
-                'content': valueController.text,
-                'date': dateTime.toString(),
-              });
+              try {
+                await firebase.collection('assignment').doc(uid!).collection(DateTime.now().toString()).doc(uid!).set({
+                  'content': valueController.text,
+                  'date': dateTime.toString(),
+                  'subname': selectedValue,
+                  'color': ColorDetail.randomColor(),
+                });
+              } catch (e) {
+                if (kDebugMode) {
+                  print(e);
+                }
+              }
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const Assingment()));
             },

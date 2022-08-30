@@ -1,3 +1,6 @@
+// TODO: 設定画面を作製する
+// TODO: サインアウトできるようにする
+
 import 'package:flutter/material.dart';
 
 import '../HomePage/Main_screen.dart';

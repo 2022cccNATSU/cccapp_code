@@ -1,8 +1,14 @@
+// TODO: 課題を追加、編集できるようにする
+// TODO: 課題をデータベースに保存されるようにする
+// TODO: 課題を完了したときに知識ポイントが 1ポイント増加されるようにする
+// TODO: UI を整える
+
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../widget/Colors.dart';
 import 'AssignmentDetail.dart';
 
 const ParameterBeginColor = Color(0xFFFF006F); //グラフの始まりの色
@@ -280,32 +286,6 @@ class _DetailHeader extends StatelessWidget {
             // subtitle: const Text(''),
           ),
         ),
-        /*Expanded(
-          flex: 1,
-          child: ListTile(
-            leading: ClipOval(
-              child: Container(
-                color: AssignmentTextColor,
-                width: 48,
-                height: 48,
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.edit,
-                    color: AssignmentIconColor,
-                  ),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AddTask(checkString: true, data: null,)));
-                  }
-                ),
-              ),
-            ),
-            title: const Text('編集'),
-            // subtitle: Text(''),
-          ),
-        ),*/
       ],
     );
   }
@@ -426,10 +406,10 @@ class TaskList extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     final thisData = snapshot.data[index];
                     return _Post(
-                      content: thisData['content'],
+                      content: thisData[index]['content'],
                       date: thisData[index]['date'],
                       subname: thisData[index]['subname'],
-                      color: Colors.blue,
+                      color: ColorDetail.returnColor(thisData[index]['color']),
                     );
                   },
                 ),
