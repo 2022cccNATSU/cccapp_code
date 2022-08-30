@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'KnowledgePoint.dart';
+
 class TimerPage extends StatefulWidget{
   const TimerPage({Key? key}) : super(key: key);
 
@@ -13,14 +15,14 @@ class TimerPage extends StatefulWidget{
 
 class _TimerPage extends State<TimerPage>{
   Timer? _timer;//時間を測定
-  DateTime? _time;//
-  DateTime? _datetime;
+  DateTime? _time;//時間を追加
+  DateTime? _datetime;//時間を設定
   bool isStart = false;
   double size = 200.0;
   double percentage = 1.00;
   double denominator = 1.00;
   @override
-  void initState() {
+  void initState()  {
     _time = DateTime.utc(0,0,0);
     _datetime = DateTime.utc(0,0);
     super.initState();
@@ -74,7 +76,7 @@ class _TimerPage extends State<TimerPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+    body: Container(
         alignment: Alignment.center,
         child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -110,7 +112,8 @@ class _TimerPage extends State<TimerPage>{
                       width: size,
                       height: size,
                       child: Center(
-                        child:Text(DateFormat.ms().format(_time!),
+                        child:Text(
+                          DateFormat.ms().format(_time!),
                           style: Theme.of(context).textTheme.headline2,
                           ),
                       ),
@@ -135,12 +138,17 @@ class _TimerPage extends State<TimerPage>{
                     onPrimary: Colors.black,
                     shape: const StadiumBorder(),
                   ),
-                  onPressed: () {
+                  onPressed: () async{
                     if(isStart){
                       cancelTimer();
+                      String message  = await KnowledgePoint().applyPoint(1);
+                      if( message == 'Succeed'){
+                        print('ok');
+                      }else{
+                        print(message);
+                      }
                     }else{
-                      timerSet(_datetime!.minute,_datetime!.second);
-                    }
+                      timerSet(_datetime!.minute,_datetime!.second);}
                     },
                 ),
               ),
