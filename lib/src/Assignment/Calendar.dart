@@ -13,9 +13,11 @@ import 'package:cccapp_code/src/Assignment/commentsInCalendar.dart';
 const Color FrameColor = Color.fromRGBO(180, 255, 255, 1.0); //妖精コメントの色
 
 DateTime _focusedDay = DateTime.now();//エミュレーターでの時刻設定に準拠しているので注意
-DateTime? _selectedDay;//タップで選択したやつ
+DateTime _selectedDay = DateTime.now();//タップで選択したやつ
 CalendarFormat _calendarFormat = CalendarFormat.month;//右上のやつ
 Map<DateTime, List> _eventsList = {};//予定
+String yotei = ('');
+
 class Calender extends StatefulWidget {
   const Calender({Key? key}) : super(key: key);
   @override
@@ -26,9 +28,9 @@ class _Calender extends State<Calender> {
   int monthNow=_focusedDay.month;
   int dayNow=_focusedDay.day;
   int hourNow=_focusedDay.hour;
-  int? Selectedyear=_selectedDay?.year;
-  int? Selectedmonth=_selectedDay?.month;
-  int? Selectedday=_selectedDay?.day;
+  int? Selectedyear=_selectedDay.year;
+  int? Selectedmonth=_selectedDay.month;
+  int? Selectedday=_selectedDay.day;
 
 
   int getHashCode(DateTime key) {
@@ -41,15 +43,15 @@ class _Calender extends State<Calender> {
     _selectedDay = _focusedDay;
     //サンプルのイベントリスト
     _eventsList = {
-      DateTime.now().subtract(const Duration(days: 2)): ['Event A6', 'Event B6'],
+      DateTime.now().subtract( const Duration(days: 2)): ['Event A6', 'Event B6'],
       DateTime.now(): ['Event A7', 'Event B7', 'Event C7', 'Event D7'],
-      DateTime.now().add(const Duration(days: 1)): [
+      DateTime.now().add( const Duration(days: 1)): [
         'Event A8',
         'Event B8',
         'Event C8',
         'Event D8'
       ],
-      DateTime.now().add(const Duration(days: 3)):
+      DateTime.now().add( Duration(days: 3)):
       {'Event A9', 'Event B9', 'Event C9'}.toList(),
       DateTime.now().add(const Duration(days: 7)): [
         'Event A10',
@@ -94,13 +96,15 @@ class _Calender extends State<Calender> {
             height: 60,
             color: Colors.blue,
             alignment: Alignment.centerRight,
-            //child: ElevatedButton(
-            //    style: ElevatedButton.styleFrom(
-            //      primary: Colors.white,
-            //    ),
-            //    child: const Text('予定を追加',style: TextStyle(color: Colors.black),),
-            //    onPressed:(){}
-            //),
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                ),
+                child: const Text('予定を追加',style: TextStyle(color: Colors.black87),),
+                onPressed:(){
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AddEvent()));
+                }
+            ),
           ),
           //カレンダーのウィジェット
           Container(
@@ -169,7 +173,7 @@ class _Calender extends State<Calender> {
                         nip: BubbleNip.rightBottom,
                         padding: const BubbleEdges.all(10),
                         color: FrameColor,
-                        child: Text(comments(monthNow,dayNow,hourNow), textAlign: TextAlign.left,style: const TextStyle(fontFamily: 'Yomogi'),),
+                        child: Text(comments(monthNow,dayNow,hourNow), textAlign: TextAlign.left,style: const TextStyle(fontFamily: 'Yomogi',color: Colors.black87),),
                       ),
                     ),
                     //妖精のプログラム
@@ -188,18 +192,17 @@ class _Calender extends State<Calender> {
                       children: [
                         Container(
                           margin: const EdgeInsets.only(right: 10,left: 10),
-                          child: Text(text(_focusedDay,_selectedDay),style: const TextStyle(fontSize: 20),)
+                          child: Text('${text()}の予定',style: const TextStyle(fontSize: 20,color: Colors.black87),)
                         ),
                         ListView(
                           shrinkWrap: true,
-                          children: getEventForDay(_selectedDay!).map((event) => ListTile(
-                            title: Text(event.toString()),
+                            children: getEventForDay(_selectedDay).map((event) => ListTile(
+                            title: Text(event.toString(),style: const TextStyle(color: Colors.black87),),
                           ))
                               .toList(),
                         )
                       ],
                     ),
-
                 ),
               ],
             ),
@@ -209,17 +212,185 @@ class _Calender extends State<Calender> {
       ),
     );
   }
-  String text(DateTime focusedDay, DateTime? selectedDay) {
-    int? selectedyear=selectedDay?.year;
-    int? selectedmonth=selectedDay?.month;
-    int? selectedday=selectedDay?.day;
-    int forcusedyear=focusedDay.year;
-    int forcusedmonth=focusedDay.month;
-    int forcusedday=focusedDay.day;
-    if(selectedDay?.year!=null&&selectedDay?.month!=null&&selectedDay?.day!=null){
-      return ('$selectedyear年$selectedmonth月$selectedday日の予定');
-    }else{
-      return ('$forcusedyear年$forcusedmonth月$forcusedday日の予定');
-    }
+}
+
+String text() {
+  return ('${_selectedDay.year}年${_selectedDay.month}月${_selectedDay.day}日');
+}
+
+const Color ThemeColor = Color(0xFFFE7C64);//テーマカラー
+const Color BackGroundColor = Color(0xFF19283D);//背景の色
+const Color TextColor = Color(0xFFB0BEC5);//全体のテキストの色
+const Color OnClickButtonColor = Color(0xFFFE7C64);//ボタンがクリックされたときの枠の色
+const Color DecisionButtonTextColor = Colors.black87;//決定ボタンのテキストの色
+
+class AddEvent extends StatelessWidget {
+  const AddEvent({Key? key}) : super(key: key);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      home: InputPage(),
+    );
+  }
+}
+
+class InputPage extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: BackGroundColor,
+        body:Center(
+          child:Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InputForm(),
+            ],
+          ),
+        )
+    );
+  }
+}
+
+class SelectSubject extends StatefulWidget {
+  const SelectSubject({Key? key}) : super(key: key);
+
+  @override
+  State<SelectSubject> createState() => _SelectSubject();
+}
+
+class  _SelectSubject extends State<SelectSubject> {
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        child:Text('選択中：${text()}',style: const TextStyle(fontSize: 30,color: TextColor),)
+    );
+
+  }
+
+}
+
+class _CustomTextField extends StatelessWidget {
+  final String labelText;
+  final String hintText;
+  final bool obscureText;
+
+  const _CustomTextField({
+    Key? key,
+    required this.labelText,
+    required this.hintText,
+    required this.obscureText,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: const TextStyle(color: TextColor),
+        hintText: hintText,
+        hintStyle: const TextStyle(color: TextColor),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(
+            color: OnClickButtonColor,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(
+            color: TextColor,
+          ),
+        ),
+      ),
+      obscureText: obscureText,
+      onChanged: (value){
+        yotei=value;
+      },
+    );
+  }
+}
+
+//日付、内容、決定のボタン
+class InputForm extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+
+      children: [
+        const SelectSubject(),
+        const SizedBox(height: 48),
+        const _CustomTextField(
+          labelText: '予定',
+          hintText: '予定を入力してください',
+          obscureText: false,
+        ),
+        const SizedBox(height: 48),
+        SizedBox(
+          width: double.infinity,
+          child: TextButton(
+            style: TextButton.styleFrom(
+              primary: TextColor,
+              backgroundColor: TextColor,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            onPressed: () {
+              if(_eventsList[_selectedDay]==null){
+                print('$yotei(null)'); //yoteiはTextFieldでとってきたやつ
+                _eventsList[_selectedDay]=[yotei];
+                print(_eventsList);
+              }else{
+                print('$yotei(not null)');
+                _eventsList[_selectedDay]?.add(yotei);
+                print(_eventsList);
+              }
+            },
+            child: Text(
+              '追加',
+              style: Theme.of(context)
+                  .textTheme
+                  .button!
+                  .copyWith(color: DecisionButtonTextColor, fontSize: 18),
+            ),
+          ),
+        ),
+        const SizedBox(height: 48),
+        SizedBox(
+          width: double.infinity,
+          child: TextButton(
+            style: TextButton.styleFrom(
+              primary: TextColor,
+              backgroundColor: TextColor,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Calender()));
+            },
+            child: Text(
+              'カレンダーに戻る',
+              style: Theme.of(context)
+                  .textTheme
+                  .button!
+                  .copyWith(color: DecisionButtonTextColor, fontSize: 18),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
