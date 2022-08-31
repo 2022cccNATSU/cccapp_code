@@ -54,7 +54,7 @@ class _Calender extends State<Calender> {
                   nip: BubbleNip.rightBottom,
                   padding: const BubbleEdges.all(10),
                   color: FrameColor,
-                  child: Text(comments(monthNow,dayNow,hourNow), textAlign: TextAlign.left),
+                  child: Text(comments(monthNow,dayNow,hourNow), textAlign: TextAlign.left,style: const TextStyle(fontFamily: 'Yomogi'),),
                 ),
               ),
               //妖精のプログラム
