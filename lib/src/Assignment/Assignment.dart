@@ -396,15 +396,16 @@ class TaskList extends StatelessWidget {
       stream: firebase.collection('assignment').doc(uid!).snapshots(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasData) {
+          print("${snapshot.data} $uid");
           return Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               _DetailHeader(),
               Expanded(
                 child: ListView.builder(
-                  itemCount: snapshot.data.length,
+                  itemCount: snapshot.data.length(),
                   itemBuilder: (BuildContext context, int index) {
-                    final thisData = snapshot.data[index];
+                    final thisData = snapshot.data;
                     return _Post(
                       content: thisData[index]['content'],
                       date: thisData[index]['date'],

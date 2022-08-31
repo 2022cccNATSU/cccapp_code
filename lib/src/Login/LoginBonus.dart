@@ -14,7 +14,7 @@ import '../HomePage/HomePage.dart';
 class LoginBonus extends StatefulWidget {
   const LoginBonus({Key? key, required this.title, required this.data})
       : super(key: key);
-  final Map<String, dynamic> data;
+  final Map<String, dynamic>? data;
   final String title;
 
   @override
@@ -98,7 +98,7 @@ class _LoginBonusState extends State<LoginBonus> {
 
   @override
   Widget build(BuildContext context) {
-    final now = widget.data['streak'];
+    final now = widget.data?['streak'];
     return Scaffold(
       body: Container(
         color: Colors.cyan[50],

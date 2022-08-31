@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:cccapp_code/src/Assignment/Calendar.dart';
 import 'package:cccapp_code/src/Assignment/Assignment.dart';
-import 'package:cccapp_code/src/HomePage//HomePage.dart';
+import 'package:cccapp_code/src/HomePage/HomePage.dart';
+
+import '../Timer/TimerPage.dart';
 
 const Color BottomBarHomeColor = Colors.indigo;//下のバーのホーム色
 const Color BottomBarCalenderColor = Colors.blue;//下のバーのカレンダーの色
@@ -28,10 +30,10 @@ class _BottomBar extends  State<BottomBar>{
         Navigator.push(context, MaterialPageRoute(builder: (context) => const Calender()));
       }
       else if(_selectedIndex==2){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Assingment()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const Assingment()));
       }
       else if(_selectedIndex==3){
-        //Navigator.push(context, MaterialPageRoute(builder: (context) => NextPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const TimerPage()));
       }
     });
   }
@@ -48,7 +50,7 @@ class _BottomBar extends  State<BottomBar>{
             colors: [Colors.indigo,Colors.indigo,Colors.blue,Colors.blue,Colors.lightBlueAccent,Colors.lightBlueAccent,Colors.cyan,Colors.cyan]
         ),
       ),
-      child: Container(
+      child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 80,
         child: BottomNavigationBar(

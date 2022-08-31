@@ -200,7 +200,7 @@ class _InputFormState extends State<InputForm> {
               final User? user = FirebaseAuth.instance.currentUser;
               final uid = user?.uid;
               try {
-                await firebase.collection('assignment').doc(uid!).collection(DateTime.now().toString()).doc(uid).set({
+                await firebase.collection('assignment').doc(uid!).collection(DateTime.now().toString()).doc().set({
                   'content': valueController.text,
                   'date': dateTime.toString(),
                   'subname': selectedValue,

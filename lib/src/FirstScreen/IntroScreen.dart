@@ -67,7 +67,7 @@ class _IntroScreenState extends State<IntroScreen>
               duration: transitionDuration,
               curve: Curves.fastOutSlowIn,
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.blue,
                 fontSize: !expanded ? _bigFontSize : 50,
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.w600,

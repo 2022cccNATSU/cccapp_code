@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 
 import '../HomePage/HomePage.dart';
 import '../Login/Login.dart';
@@ -25,13 +26,17 @@ class FirstScreen extends StatelessWidget {
           return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
             stream: FirebaseFirestore.instance.collection('login').doc(uid).snapshots(),
             builder: (context, snapshot) {
-              print(snapshot.data!);
+              if (kDebugMode) {
+                //print(snapshot.data!);
+              }
               if(snapshot.hasData) {
-                var today = DateFormat('yyyy-MM-dd').format(DateTime.now());
+                //var today = DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
+                var userDocument = snapshot.data;
                 if (false/*snapshot.data!['date'].toString() == today*/) {
-                  return LoginBonus(title: 'cccapp',data: snapshot.data!.data()!);
+                  return LoginBonus(title: 'cccapp',data: userDocument?.data());
                 } else {
-                  return const MyHomePage(title: 'cccapp');
+                  Navigator.of(context).push(MaterialPageRoute(builder:(context) {return const MyHomePage(title: 'cccapp_code');}));
+                  // return const Text("Strange Error");
                 }
               }
               return const CircularProgressIndicator();
