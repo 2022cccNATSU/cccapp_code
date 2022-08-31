@@ -5,7 +5,6 @@ import 'package:cccapp_code/src/Assignment//FairyImagesInCalendar.dart';
 //import 'package:cccapp_code/widget/Fukidashi.dart';
 import 'package:cccapp_code/src/Assignment/commentsInCalendar.dart';
 
-
 const Color FrameColor = Color.fromRGBO(180, 255, 255, 1.0); //妖精コメントの色
 
 DateTime _focusedDay = DateTime.now();//エミュレーターでの時刻設定に準拠しているので注意

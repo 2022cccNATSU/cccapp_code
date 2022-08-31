@@ -62,14 +62,18 @@ class TopBar extends StatelessWidget {
                     width: 180,
                   ),
                   Expanded(
-                    child: IconButton(
-                      icon: const Icon(
+                    child: InkWell(
+                      child: const Icon(
                         Icons.settings,
                         color: topBarTextColor,
                         size: 25,
                       ),
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder:(BuildContext context)=>Settings()));
+                      onTap: () {
+                        Future.delayed(Duration.zero, () {
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(
+                              builder: (
+                                  BuildContext context) => const Settings()));
+                        });
                       },
                     ),
                   ),
@@ -91,39 +95,43 @@ class FailyImage extends StatefulWidget {
   State<FailyImage> createState() => _FailyImageState();
 }
 
-class _FailyImageState extends State<FailyImage>{
+class _FailyImageState extends State<FailyImage> {
   var rand = math.Random();
-  int _counter1=0;
-  int _counter2=0;
+  int _counter1 = 0;
+  int _counter2 = 0;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         InkWell(
-          onTap: (){
+          onTap: () {
             setState(() {
-              _counter1=rand.nextInt(7);
-              _counter2=rand.nextInt(3);
+              _counter1 = rand.nextInt(7);
+              _counter2 = rand.nextInt(3);
               print('image change to $_counter1');
               print('comment change to $_counter2');
             });
           },
           child: Stack(
-              children:[
+              children: [
                 Image.asset('assets/images/smile1.png'),
                 images(_counter1),
               ]
           ),
         ),
         Container(
-          width: MediaQuery.of(context).size.width,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width,
           height: 155,
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black54),
             color: Colors.grey[100],
           ),
-          child: Text(comments(_counter1,_counter2),style: const TextStyle(fontFamily: 'Yomogi',fontSize: 20),),
+          child: Text(comments(_counter1, _counter2),
+            style: const TextStyle(fontFamily: 'Yomogi', fontSize: 20),),
           //child: DefaultTextStyle(
           //  style: const TextStyle(
           //    color: Colors.black87,
